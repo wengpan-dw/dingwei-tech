@@ -179,16 +179,16 @@ nav a#pull span {
   background-position: center;
 }
 .slide-1 .banner-slide-bg {
-  background: linear-gradient(135deg, #0a1929 0%, #132f4c 50%, #0d2137 100%);
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='g' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='30' cy='30' r='1.2' fill='rgba(143,195,32,0.08)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3C/svg%3E"), linear-gradient(135deg, #0a1929 0%, #132f4c 50%, #0d2137 100%);
+  background: linear-gradient(135deg, rgba(10,25,41,0.85) 0%, rgba(19,47,76,0.8) 50%, rgba(13,33,55,0.9) 100%),
+              url("https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&fit=max") center/cover no-repeat;
 }
 .slide-2 .banner-slide-bg {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='g2' width='80' height='80' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 40 L40 0 L80 40 L40 80Z' fill='none' stroke='rgba(143,195,32,0.05)' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g2)'/%3E%3C/svg%3E"), linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: linear-gradient(135deg, rgba(26,26,46,0.85) 0%, rgba(22,33,62,0.8) 50%, rgba(15,52,96,0.9) 100%),
+              url("https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=1200&fit=max") center/cover no-repeat;
 }
 .slide-3 .banner-slide-bg {
-  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='g3' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='50' cy='50' r='1' fill='rgba(143,195,32,0.06)'/%3E%3Ccircle cx='0' cy='0' r='1.5' fill='rgba(143,195,32,0.04)'/%3E%3Ccircle cx='100' cy='0' r='1.5' fill='rgba(143,195,32,0.04)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g3)'/%3E%3C/svg%3E"), linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  background: linear-gradient(135deg, rgba(15,32,39,0.85) 0%, rgba(32,58,67,0.8) 50%, rgba(44,83,100,0.9) 100%),
+              url("https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&fit=max") center/cover no-repeat;
 }
 .banner-content {
   position: relative; z-index: 2;
@@ -283,10 +283,11 @@ nav a#pull span {
 .saf-fadeInUp { animation: fadeInUp 0.8s ease-out both; }
 
 @media (max-width: 768px) {
-  .banner-swiper { height: 70vh; min-height: 450px; max-height: 600px; }
-  .banner-content h1 { font-size: 24px; }
-  .banner-desc { font-size: 14px; }
-  .btn-banner { padding: 12px 28px; font-size: 14px; }
+  .banner-swiper { height: 60vh; min-height: 400px; max-height: 500px; }
+  .banner-slide-bg { background-attachment: scroll !important; }
+  .banner-content h1 { font-size: 22px; }
+  .banner-desc { font-size: 13px; }
+  .btn-banner { padding: 10px 24px; font-size: 13px; }
   .scroll-down { bottom: 20px; }
   .banner-swiper .swiper-button-prev,
   .banner-swiper .swiper-button-next { display: none; }
@@ -319,11 +320,12 @@ nav a#pull span {
   margin-top: 6px;
 }
 @media (max-width: 768px) {
-  .stats-row { flex-wrap: wrap; padding: 24px 0; }
-  .stat-item { flex: 0 0 50%; border-bottom: 1px solid #f0f0f0; padding: 16px 0; }
+  .stats-row { flex-wrap: wrap; padding: 20px 0; }
+  .stat-item { flex: 0 0 50%; border-bottom: 1px solid #f0f0f0; padding: 14px 0; }
   .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
   .stat-item:nth-child(2) { border-right: none; }
-  .stat-num { font-size: 30px; }
+  .stat-num { font-size: 28px; }
+  .stat-label { font-size: 12px; }
 }
 
 /* ====== 业务支持（产品中心） ====== */
@@ -418,13 +420,19 @@ nav a#pull span {
 
 @media (max-width: 768px) {
   .service .nav-tabs > li > a {
-    min-height: 110px; padding-top: 60px;
-    background-size: 32px !important;
-    background-position: center 16px !important;
-    font-size: 13px;
+    min-height: 90px; padding-top: 50px;
+    background-size: 28px !important;
+    background-position: center 12px !important;
+    font-size: 12px;
   }
-  .service .tab-content { padding: 40px 15px; }
-  .tab_con_tit { font-size: 20px; }
+  .service .tab-content { padding: 30px 15px; }
+  .service .tab-content .tabimg { margin-bottom: 20px; }
+  .service .tab-content .tabimg img {
+    width: 100%; height: auto; max-height: 280px;
+    object-fit: contain; border-radius: 6px;
+  }
+  .tab_con_tit { font-size: 18px; }
+  .tab_con_tex { font-size: 14px; }
 }
 
 /* ====== 解决方案（应用领域） ====== */
@@ -485,9 +493,15 @@ nav a#pull span {
 }
 @media (max-width: 768px) {
   .work .myTab_menu2 .nav-tabs > li > a {
-    font-size: 12px; line-height: 60px;
+    font-size: 12px; line-height: 50px;
   }
-  .work .myTab_menu2 .nav-tabs > li { height: 60px; }
+  .work .myTab_menu2 .nav-tabs > li { height: 50px; }
+  .work .tab-content { padding: 30px 15px 50px; }
+  .work .tab-content .tab_con_tex1 { font-size: 20px; }
+  .work .tab-content .tab_con_tex2 { font-size: 14px; padding: 0 10px; }
+  .work .tab-content .works-grid img {
+    max-height: 250px; border-radius: 6px;
+  }
 }
 
 /* ====== 关于我们 ====== */
@@ -519,6 +533,25 @@ nav a#pull span {
 .about_more:hover {
   background: #8fc320; color: #fff;
   text-decoration: none;
+}
+.about-row {
+  display: flex; align-items: center; gap: 40px;
+  text-align: left; max-width: 1100px; margin: 0 auto;
+}
+.about-text { flex: 1; }
+.about-text p { margin: 0 0 12px 0 !important; max-width: 100% !important; }
+.about-img { flex: 0 0 420px; }
+.about-img img {
+  width: 100%; border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+@media (max-width: 768px) {
+  .about { padding: 50px 15px; }
+  .about_con h2 { font-size: 24px; }
+  .about_con p { font-size: 14px; }
+  .about-row { flex-direction: column; text-align: center; gap: 24px; }
+  .about-img { flex: 0 0 auto; max-width: 100%; }
+  .about-img img { max-height: 250px; object-fit: cover; }
 }
 
 /* ====== 核心优势 ====== */
@@ -575,7 +608,12 @@ nav a#pull span {
   color: #888; font-size: 14px; line-height: 1.8;
 }
 @media (max-width: 992px) { .adv-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 576px) { .adv-grid { grid-template-columns: 1fr; } }
+@media (max-width: 576px) {
+  .adv-grid { grid-template-columns: 1fr; gap: 16px; }
+  .adv-card { padding: 20px 15px; }
+  .adv-card h3 { font-size: 16px; }
+  .adv-card p { font-size: 13px; }
+}
 
 /* ====== 新闻中心 ====== */
 .news {
@@ -642,6 +680,10 @@ nav a#pull span {
   width: 100%; max-height: 200px; object-fit: cover;
   border-radius: 4px; margin-bottom: 10px;
 }
+@media (max-width: 768px) {
+  .hotnews img { max-height: 160px; }
+  .hotnews h4 { font-size: 15px; }
+}
 .hotnews a {
   display: block; font-size: 15px; font-weight: 600;
   color: #333; line-height: 1.6;
@@ -704,7 +746,14 @@ nav a#pull span {
 .contact-card p {
   color: #666; font-size: 15px; line-height: 1.8;
 }
-@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 16px; }
+  .contact h2 { font-size: 24px; }
+  .contact .contact-sub { font-size: 14px; }
+  .contact-card { padding: 20px 15px; }
+  .contact-card h4 { font-size: 16px; }
+  .contact-card p { font-size: 13px; }
+}
 
 /* ====== Footer ====== */
 .footer {
@@ -747,7 +796,10 @@ nav a#pull span {
   line-height: 2;
 }
 @media (max-width: 768px) {
-  .footer-row { flex-direction: column; gap: 24px; }
+  .footer { padding: 40px 15px 0; }
+  .footer-row { flex-direction: column; gap: 24px; text-align: center; }
+  .footer-col h4::after { left: 50%; transform: translateX(-50%); }
+  .footer-col.footer-qr { margin: 0 auto; }
 }
 
 /* ====== 侧边导航 ====== */
@@ -922,7 +974,7 @@ nav a#pull span {
       <div class="row">
         <div class="col-md-6">
           <div class="tabimg">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23e8f5e9'/%3E%3Crect x='180' y='60' width='240' height='280' rx='12' fill='%238fc320' opacity='0.15'/%3E%3Crect x='200' y='120' width='200' height='160' rx='8' fill='%238fc320' opacity='0.3'/%3E%3Ccircle cx='300' cy='180' r='30' fill='%238fc320'/%3E%3Ctext x='300' y='250' text-anchor='middle' font-size='14' fill='%238fc320' font-weight='bold'%3EBMS 定位器%3C/text%3E%3C/svg%3E" alt="BMS定位器">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Cdefs%3E%3ClinearGradient id='bmsBody' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232a2a2a'/%3E%3Cstop offset='50%25' stop-color='%233a3a3a'/%3E%3Cstop offset='100%25' stop-color='%23222222'/%3E%3C/linearGradient%3E%3ClinearGradient id='bmsScreen' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%230a3d0a'/%3E%3Cstop offset='100%25' stop-color='%23062006'/%3E%3C/linearGradient%3E%3Cfilter id='bmsShadow'%3E%3CfeDropShadow dx='3' dy='5' stdDeviation='6' flood-color='%23000' flood-opacity='0.3'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='600' height='400' fill='%23f5f7fa'/%3E%3Cellipse cx='300' cy='350' rx='140' ry='18' fill='%23000' opacity='0.08'/%3E%3Crect x='180' y='80' width='240' height='240' rx='16' fill='url(%23bmsBody)' filter='url(%23bmsShadow)'/%3E%3Crect x='180' y='80' width='240' height='50' rx='16' fill='%23444'/%3E%3Crect x='180' y='115' width='240' height='15' fill='%23444'/%3E%3Crect x='280' y='40' width='40' height='42' rx='4' fill='%23555'/%3E%3Crect x='288' y='30' width='24' height='12' rx='3' fill='%238fc320'/%3E%3Crect x='210' y='150' width='180' height='60' rx='6' fill='url(%23bmsScreen)'/%3E%3Ctext x='300' y='178' text-anchor='middle' font-size='11' fill='%238fc320' font-family='monospace'%3ESOC: 87%25 3.82V%3C/text%3E%3Ctext x='300' y='196' text-anchor='middle' font-size='10' fill='%2366cc66' font-family='monospace'%3ET:32°C SYS:OK%3C/text%3E%3Ccircle cx='220' cy='235' r='5' fill='%238fc320'/%3E%3Ccircle cx='250' cy='235' r='5' fill='%23ff9800'/%3E%3Ccircle cx='280' cy='235' r='5' fill='%23333'/%3E%3Crect x='220' y='280' width='24' height='10' rx='2' fill='%23555'/%3E%3Crect x='260' y='280' width='24' height='10' rx='2' fill='%23555'/%3E%3Crect x='300' y='280' width='40' height='10' rx='2' fill='%23555'/%3E%3Ctext x='300' y='330' text-anchor='middle' font-size='13' fill='%23888' font-weight='bold'%3EDINGWEI TECH%3C/text%3E%3C/svg%3E" alt="BMS定位器">
           </div>
         </div>
         <div class="col-md-6">
@@ -941,7 +993,7 @@ nav a#pull span {
       <div class="row">
         <div class="col-md-6">
           <div class="tabimg">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23e3f2fd'/%3E%3Crect x='150' y='40' width='300' height='320' rx='12' fill='%231976d2' opacity='0.1'/%3E%3Ccircle cx='300' cy='140' r='50' fill='none' stroke='%231976d2' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='300' cy='140' r='30' fill='%231976d2' opacity='0.2'/%3E%3Ccircle cx='300' cy='140' r='10' fill='%238fc320'/%3E%3Ctext x='300' y='280' text-anchor='middle' font-size='14' fill='%23555' font-weight='bold'%3E4G 智能中控%3C/text%3E%3C/svg%3E" alt="4G智能中控">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Cdefs%3E%3ClinearGradient id='g4Body' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%231a3a1a'/%3E%3Cstop offset='100%25' stop-color='%230d200d'/%3E%3C/linearGradient%3E%3Cfilter id='g4Shadow'%3E%3CfeDropShadow dx='3' dy='4' stdDeviation='5' flood-color='%23000' flood-opacity='0.25'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='600' height='400' fill='%23f0f4f8'/%3E%3Cellipse cx='300' cy='350' rx='150' ry='20' fill='%23000' opacity='0.07'/%3E%3Crect x='140' y='60' width='320' height='260' rx='10' fill='url(%23g4Body)' filter='url(%23g4Shadow)'/%3E%3Cline x1='160' y1='100' x2='280' y2='100' stroke='%238fc320' stroke-width='1.5' opacity='0.4'/%3E%3Cline x1='160' y1='120' x2='260' y2='120' stroke='%238fc320' stroke-width='1' opacity='0.3'/%3E%3Crect x='200' y='70' width='60' height='40' rx='4' fill='%23222' stroke='%238fc320' stroke-width='1.5'/%3E%3Ctext x='230' y='95' text-anchor='middle' font-size='9' fill='%238fc320' font-weight='bold'%3E4G LTE%3C/text%3E%3Crect x='340' y='80' width='50' height='35' rx='3' fill='%23222' stroke='%238fc320' stroke-width='1'/%3E%3Ctext x='365' y='102' text-anchor='middle' font-size='8' fill='%23888'%3EMCU%3C/text%3E%3Crect x='200' y='130' width='45' height='30' rx='3' fill='%23222' stroke='%23ff9800' stroke-width='1'/%3E%3Ctext x='222' y='149' text-anchor='middle' font-size='7' fill='%23ff9800'%3EGNSS%3C/text%3E%3Crect x='360' y='130' width='35' height='25' rx='2' fill='%23333'/%3E%3Crect x='365' y='135' width='25' height='15' rx='1' fill='%23ffcc00' opacity='0.3'/%3E%3Ccircle cx='180' cy='75' r='8' fill='%23c89b3c'/%3E%3Ccircle cx='180' cy='75' r='4' fill='%23e8c84a'/%3E%3Ccircle cx='460' cy='100' r='8' fill='%23c89b3c'/%3E%3Ccircle cx='460' cy='100' r='4' fill='%23e8c84a'/%3E%3Ccircle cx='300' cy='200' r='4' fill='%238fc320'/%3E%3Ctext x='312' y='204' font-size='9' fill='%23888'%3EPWR%3C/text%3E%3Ccircle cx='350' cy='200' r='4' fill='%2333cc33'/%3E%3Ctext x='362' y='204' font-size='9' fill='%23888'%3ENET%3C/text%3E%3Crect x='160' y='240' width='12' height='8' rx='1' fill='%23c89b3c'/%3E%3Crect x='180' y='240' width='12' height='8' rx='1' fill='%23c89b3c'/%3E%3Crect x='200' y='240' width='12' height='8' rx='1' fill='%23c89b3c'/%3E%3Ctext x='300' y='295' text-anchor='middle' font-size='12' fill='%23888' font-weight='bold'%3E4G Smart Controller%3C/text%3E%3Ctext x='300' y='312' text-anchor='middle' font-size='9' fill='%23666'%3EDW-4GC V2.1%3C/text%3E%3C/svg%3E" alt="4G智能中控">
           </div>
         </div>
         <div class="col-md-6">
@@ -961,7 +1013,7 @@ nav a#pull span {
       <div class="row">
         <div class="col-md-6">
           <div class="tabimg">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23fff3e0'/%3E%3Cpath d='M300 50 L380 150 L350 350 L250 350 L220 150Z' fill='%23ff9800' opacity='0.12'/%3E%3Ccircle cx='300' cy='150' r='8' fill='%23ff9800' opacity='0.5'/%3E%3Ccircle cx='260' cy='200' r='6' fill='%23ff9800' opacity='0.4'/%3E%3Ccircle cx='340' cy='180' r='7' fill='%23ff9800' opacity='0.3'/%3E%3Ctext x='300' y='300' text-anchor='middle' font-size='14' fill='%238fc320' font-weight='bold'%3E9DOF 传感器%3C/text%3E%3C/svg%3E" alt="9DOF惯性传感">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Cdefs%3E%3ClinearGradient id='dofBody' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%231a1a2e'/%3E%3Cstop offset='100%25' stop-color='%230d0d1a'/%3E%3C/linearGradient%3E%3Cfilter id='dofShadow'%3E%3CfeDropShadow dx='2' dy='4' stdDeviation='5' flood-color='%23000' flood-opacity='0.3'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='600' height='400' fill='%23f8f9fa'/%3E%3Cellipse cx='300' cy='350' rx='120' ry='16' fill='%23000' opacity='0.06'/%3E%3Crect x='200' y='80' width='200' height='200' rx='12' fill='url(%23dofBody)' filter='url(%23dofShadow)'/%3E%3Cline x1='300' y1='150' x2='450' y2='100' stroke='%23ff4444' stroke-width='2.5'/%3E%3Cpolygon points='450,100 440,95 438,105' fill='%23ff4444'/%3E%3Ctext x='460' y='105' font-size='10' fill='%23ff4444' font-weight='bold'%3EX%3C/text%3E%3Cline x1='300' y1='150' x2='250' y2='50' stroke='%2344ff44' stroke-width='2.5'/%3E%3Cpolygon points='250,50 242,58 255,57' fill='%2344ff44'/%3E%3Ctext x='230' y='45' font-size='10' fill='%2344ff44' font-weight='bold'%3EY%3C/text%3E%3Cline x1='300' y1='150' x2='300' y2='300' stroke='%234488ff' stroke-width='2.5'/%3E%3Cpolygon points='300,300 293,288 307,288' fill='%234488ff'/%3E%3Ctext x='285' y='315' font-size='10' fill='%234488ff' font-weight='bold'%3EZ%3C/text%3E%3Crect x='270' y='120' width='60' height='60' rx='4' fill='%23333' stroke='%238fc320' stroke-width='1.5'/%3E%3Crect x='280' y='130' width='40' height='40' rx='2' fill='%23444'/%3E%3Ccircle cx='300' cy='150' r='8' fill='none' stroke='%238fc320' stroke-width='1.5'/%3E%3Ccircle cx='300' cy='150' r='3' fill='%238fc320'/%3E%3Cellipse cx='300' cy='150' rx='20' ry='20' fill='none' stroke='%238fc320' stroke-width='0.5' opacity='0.4'/%3E%3Cellipse cx='300' cy='150' rx='18' ry='8' fill='none' stroke='%238fc320' stroke-width='0.5' opacity='0.3'/%3E%3Crect x='220' y='210' width='8' height='14' rx='1' fill='%23c89b3c'/%3E%3Crect x='240' y='210' width='8' height='14' rx='1' fill='%23c89b3c'/%3E%3Crect x='260' y='210' width='8' height='14' rx='1' fill='%23c89b3c'/%3E%3Crect x='332' y='210' width='8' height='14' rx='1' fill='%23c89b3c'/%3E%3Crect x='352' y='210' width='8' height='14' rx='1' fill='%23c89b3c'/%3E%3Crect x='372' y='210' width='8' height='14' rx='1' fill='%23c89b3c'/%3E%3Ctext x='300' y='260' text-anchor='middle' font-size='12' fill='%23888' font-weight='bold'%3E9DOF IMU%3C/text%3E%3Ctext x='300' y='278' text-anchor='middle' font-size='9' fill='%23666'%3EAccel + Gyro + Mag%3C/text%3E%3C/svg%3E" alt="9DOF惯性传感">
           </div>
         </div>
         <div class="col-md-6">
@@ -981,7 +1033,7 @@ nav a#pull span {
       <div class="row">
         <div class="col-md-6">
           <div class="tabimg">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23f3e5f5'/%3E%3Ccircle cx='140' cy='120' r='40' fill='%238fc320' opacity='0.15'/%3E%3Ccircle cx='460' cy='120' r='40' fill='%238fc320' opacity='0.15'/%3E%3Ccircle cx='300' cy='200' r='50' fill='%238fc320' opacity='0.2'/%3E%3Cline x1='180' y1='120' x2='250' y2='200' stroke='%238fc320' stroke-width='2' opacity='0.3'/%3E%3Cline x1='420' y1='120' x2='350' y2='200' stroke='%238fc320' stroke-width='2' opacity='0.3'/%3E%3Ctext x='300' y='320' text-anchor='middle' font-size='14' fill='%238fc320' font-weight='bold'%3EAIOT 云平台%3C/text%3E%3C/svg%3E" alt="AIOT物联平台">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Cdefs%3E%3ClinearGradient id='aiotBg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230a1628'/%3E%3Cstop offset='100%25' stop-color='%23162840'/%3E%3C/linearGradient%3E%3Cfilter id='aiotGlow'%3E%3CfeGaussianBlur stdDeviation='3'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='600' height='400' fill='url(%23aiotBg)'/%3E%3Cline x1='0' y1='100' x2='600' y2='100' stroke='%238fc320' stroke-width='0.5' opacity='0.08'/%3E%3Cline x1='0' y1='200' x2='600' y2='200' stroke='%238fc320' stroke-width='0.5' opacity='0.08'/%3E%3Cline x1='0' y1='300' x2='600' y2='300' stroke='%238fc320' stroke-width='0.5' opacity='0.08'/%3E%3Cline x1='150' y1='0' x2='150' y2='400' stroke='%238fc320' stroke-width='0.5' opacity='0.08'/%3E%3Cline x1='300' y1='0' x2='300' y2='400' stroke='%238fc320' stroke-width='0.5' opacity='0.08'/%3E%3Cline x1='450' y1='0' x2='450' y2='400' stroke='%238fc320' stroke-width='0.5' opacity='0.08'/%3E%3Cpath d='M200 150 Q200 100 250 100 Q260 60 310 60 Q360 60 370 100 Q420 100 420 150 Q440 150 440 170 Q440 200 400 200 L210 200 Q170 200 170 170 Q170 150 200 150Z' fill='%238fc320' opacity='0.25'/%3E%3Crect x='100' y='230' width='80' height='100' rx='4' fill='%23111' stroke='%238fc320' stroke-width='1'/%3E%3Ccircle cx='130' cy='255' r='5' fill='%238fc320'/%3E%3Crect x='110' y='270' width='60' height='8' rx='2' fill='%23333'/%3E%3Crect x='110' y='285' width='60' height='8' rx='2' fill='%23333'/%3E%3Crect x='110' y='300' width='40' height='8' rx='2' fill='%23333'/%3E%3Crect x='240' y='230' width='80' height='100' rx='4' fill='%23111' stroke='%238fc320' stroke-width='1'/%3E%3Ccircle cx='270' cy='255' r='5' fill='%2333cc33'/%3E%3Crect x='250' y='270' width='60' height='8' rx='2' fill='%23333'/%3E%3Crect x='250' y='285' width='60' height='8' rx='2' fill='%23333'/%3E%3Crect x='250' y='300' width='40' height='8' rx='2' fill='%23333'/%3E%3Crect x='380' y='230' width='80' height='100' rx='4' fill='%23111' stroke='%238fc320' stroke-width='1'/%3E%3Ccircle cx='410' cy='255' r='5' fill='%238fc320'/%3E%3Crect x='390' y='270' width='60' height='8' rx='2' fill='%23333'/%3E%3Crect x='390' y='285' width='60' height='8' rx='2' fill='%23333'/%3E%3Crect x='390' y='300' width='40' height='8' rx='2' fill='%23333'/%3E%3Crect x='80' y='120' width='16' height='20' rx='2' fill='%238fc320' opacity='0.3'/%3E%3Crect x='500' y='150' width='16' height='20' rx='2' fill='%238fc320' opacity='0.3'/%3E%3Crect x='520' y='300' width='16' height='20' rx='2' fill='%238fc320' opacity='0.3'/%3E%3Cpath d='M96 130 L200 160' stroke='%238fc320' stroke-width='0.8' fill='none' opacity='0.2' stroke-dasharray='4,4'/%3E%3Cpath d='M420 150 L508 155' stroke='%238fc320' stroke-width='0.8' fill='none' opacity='0.2' stroke-dasharray='4,4'/%3E%3Cpath d='M280 330 L520 310' stroke='%238fc320' stroke-width='0.8' fill='none' opacity='0.2' stroke-dasharray='4,4'/%3E%3Ctext x='300' y='370' text-anchor='middle' font-size='16' fill='%238fc320' font-weight='bold' opacity='0.8'%3EAIOT Cloud Platform%3C/text%3E%3C/svg%3E" alt="AIOT物联平台">
           </div>
         </div>
         <div class="col-md-6">
@@ -1019,7 +1071,7 @@ nav a#pull span {
       <div class="works-grids" data-scroll-reveal="enter left and move 100px over 1s">
         <a href="#contact">
           <div class="works-grid">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e8f5e9'/%3E%3Cstop offset='100%25' style='stop-color:%23c8e6c9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='400' fill='url(%23g)'/%3E%3Crect x='80' y='100' width='200' height='120' rx='10' fill='%238fc320' opacity='0.15'/%3E%3Ccircle cx='180' cy='180' r='20' fill='%238fc320' opacity='0.4'/%3E%3Crect x='340' y='140' width='150' height='10' rx='5' fill='%238fc320' opacity='0.2'/%3E%3Crect x='340' y='170' width='200' height='8' rx='4' fill='%238fc320' opacity='0.1'/%3E%3Ctext x='600' y='220' text-anchor='middle' font-size='18' fill='%238fc320' font-weight='bold'%3E🔋 实时电池监控 → 云端数据分析 → 智能运维调度%3C/text%3E%3C/svg%3E" alt="二轮车BMS定位方案">
+            <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=1200&fit=max" alt="二轮车BMS定位方案">
           </div>
         </a>
       </div>
@@ -1033,7 +1085,7 @@ nav a#pull span {
       <div class="works-grids" data-scroll-reveal="enter left and move 100px over 1s">
         <a href="#contact">
           <div class="works-grid">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e3f2fd'/%3E%3Cstop offset='100%25' style='stop-color:%23bbdefb'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='400' fill='url(%23g2)'/%3E%3Ccircle cx='200' cy='160' r='50' fill='none' stroke='%238fc320' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='200' cy='160' r='25' fill='%238fc320' opacity='0.15'/%3E%3Ccircle cx='200' cy='160' r='10' fill='%238fc320' opacity='0.4'/%3E%3Ccircle cx='600' cy='120' r='30' fill='%238fc320' opacity='0.1'/%3E%3Ccircle cx='850' cy='180' r='40' fill='none' stroke='%238fc320' stroke-width='1.5' opacity='0.2'/%3E%3Ctext x='600' y='280' text-anchor='middle' font-size='18' fill='%238fc320' font-weight='bold'%3E📍 多模定位 + 电子围栏 + 轨迹回放 → 资产全程可追溯%3C/text%3E%3C/svg%3E" alt="设备物联定位方案">
+            <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200&fit=max" alt="设备物联定位方案">
           </div>
         </a>
       </div>
@@ -1047,7 +1099,7 @@ nav a#pull span {
       <div class="works-grids" data-scroll-reveal="enter left and move 100px over 1s">
         <a href="#contact">
           <div class="works-grid">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fff3e0'/%3E%3Cstop offset='100%25' style='stop-color:%23ffe0b2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='400' fill='url(%23g3)'/%3E%3Cpath d='M200 300 Q350 100 600 200 Q850 300 1000 150' fill='none' stroke='%238fc320' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='200' cy='300' r='8' fill='%238fc320' opacity='0.5'/%3E%3Ccircle cx='1000' cy='150' r='8' fill='%238fc320' opacity='0.5'/%3E%3Cpolygon points='1000,150 990,140 985,150 990,160' fill='%238fc320' opacity='0.4'/%3E%3Ctext x='600' y='360' text-anchor='middle' font-size='18' fill='%238fc320' font-weight='bold'%3E🧭 9DOF IMU → 姿态解算 → 航位推算 → 碰撞检测%3C/text%3E%3C/svg%3E" alt="惯性导航方案">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&fit=max" alt="惯性导航方案">
           </div>
         </a>
       </div>
@@ -1061,7 +1113,7 @@ nav a#pull span {
       <div class="works-grids" data-scroll-reveal="enter left and move 100px over 1s">
         <a href="#contact">
           <div class="works-grid">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f3e5f5'/%3E%3Cstop offset='100%25' style='stop-color:%23e1bee7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='400' fill='url(%23g4)'/%3E%3Crect x='200' y='100' width='100' height='80' rx='6' fill='%238fc320' opacity='0.1'/%3E%3Crect x='500' y='60' width='100' height='120' rx='6' fill='%238fc320' opacity='0.15'/%3E%3Crect x='800' y='80' width='100' height='100' rx='6' fill='%238fc320' opacity='0.1'/%3E%3Cline x1='300' y1='140' x2='500' y2='120' stroke='%238fc320' stroke-width='2' opacity='0.2'/%3E%3Cline x1='600' y1='120' x2='800' y2='130' stroke='%238fc320' stroke-width='2' opacity='0.2'/%3E%3Ctext x='600' y='280' text-anchor='middle' font-size='18' fill='%238fc320' font-weight='bold'%3E🔧 需求分析 → 方案设计 → 原型开发 → 批量交付%3C/text%3E%3C/svg%3E" alt="智慧物联定制方案">
+            <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&fit=max" alt="智慧物联定制方案">
           </div>
         </a>
       </div>
@@ -1111,11 +1163,18 @@ nav a#pull span {
 <div class="about" id="about">
   <div class="about_con container">
     <h2 data-scroll-reveal="enter bottom and move 30px over 0.4s">关于我们</h2>
-    <p data-scroll-reveal="enter bottom and move 30px over 0.6s">武汉鼎为智慧科技有限公司位于武汉市江汉区创世纪广场A座1705，</p>
-    <p data-scroll-reveal="enter bottom and move 30px over 0.8s">是一家专注于 AIOT 物联网、BMS 定位器、9DOF 惯性传感方案的高科技企业。</p>
-    <p data-scroll-reveal="enter bottom and move 30px over 1.0s">公司具备 4G 定位器嵌入式软硬件核心技术，深度掌握各品牌 BMS 通讯协议，</p>
-    <p data-scroll-reveal="enter bottom and move 30px over 1.2s">为客户提供从方案设计到批量交付的一站式软硬件定制服务。</p>
-    <a class="about_more" href="#contact" data-scroll-reveal="enter bottom and move 30px over 1.4s">联系我们</a>
+    <div class="about-row">
+      <div class="about-text">
+        <p data-scroll-reveal="enter bottom and move 30px over 0.6s">武汉鼎为智慧科技有限公司位于武汉市江汉区创世纪广场A座1705，</p>
+        <p data-scroll-reveal="enter bottom and move 30px over 0.8s">是一家专注于 AIOT 物联网、BMS 定位器、9DOF 惯性传感方案的高科技企业。</p>
+        <p data-scroll-reveal="enter bottom and move 30px over 1.0s">公司具备 4G 定位器嵌入式软硬件核心技术，深度掌握各品牌 BMS 通讯协议，</p>
+        <p data-scroll-reveal="enter bottom and move 30px over 1.2s">为客户提供从方案设计到批量交付的一站式软硬件定制服务。</p>
+        <a class="about_more" href="#contact" data-scroll-reveal="enter bottom and move 30px over 1.4s">联系我们</a>
+      </div>
+      <div class="about-img" data-scroll-reveal="enter right and move 60px over 0.8s">
+        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200&fit=max" alt="鼎为智慧科技">
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1137,7 +1196,7 @@ nav a#pull span {
         <ul class="list-unstyled">
           <li class="new_sbox clearfix">
             <a href="#news">
-              <div class="fl"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e8f5e9'/%3E%3Ctext x='150' y='110' text-anchor='middle' font-size='14' fill='%238fc320'%3E行业动态%3C/text%3E%3C/svg%3E" alt=""></div>
+              <div class="fl"><img src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=1200&fit=max" alt=""></div>
               <div class="fr">
                 <p class="news_title">两轮电动车 BMS 定位器市场趋势分析</p>
                 <span class="news_description">随着共享出行与换电模式的快速发展，BMS 定位器成为电动车智能化升级的核心部件，市场需求持续增长……</span>
@@ -1146,7 +1205,7 @@ nav a#pull span {
           </li>
           <li class="new_sbox clearfix">
             <a href="#news">
-              <div class="fl"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e3f2fd'/%3E%3Ctext x='150' y='110' text-anchor='middle' font-size='14' fill='%231976d2'%3E技术前沿%3C/text%3E%3C/svg%3E" alt=""></div>
+              <div class="fl"><img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&fit=max" alt=""></div>
               <div class="fr">
                 <p class="news_title">9DOF 惯性传感在车辆姿态检测中的应用</p>
                 <span class="news_description">惯性测量单元（IMU）正在成为智能车辆的关键传感器，本文探讨 9DOF 在碰撞检测、姿态感知方面的最新进展……</span>
@@ -1155,7 +1214,7 @@ nav a#pull span {
           </li>
           <li class="new_sbox clearfix">
             <a href="#news">
-              <div class="fl"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23fff3e0'/%3E%3Ctext x='150' y='110' text-anchor='middle' font-size='14' fill='%23ff9800'%3E政策解读%3C/text%3E%3C/svg%3E" alt=""></div>
+              <div class="fl"><img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&fit=max" alt=""></div>
               <div class="fr">
                 <p class="news_title">物联网设备安全新规解读与应对策略</p>
                 <span class="news_description">最新物联网安全标准发布，对设备认证、数据加密提出更高要求，企业如何快速合规……</span>
@@ -1173,7 +1232,7 @@ nav a#pull span {
           <a class="pull-right" href="#news">More+</a>
         </div>
         <div class="hotnews">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect width='600' height='300' fill='%23e8f5e9'/%3E%3Crect x='180' y='80' width='240' height='140' rx='8' fill='%238fc320' opacity='0.12'/%3E%3Ccircle cx='300' cy='150' r='30' fill='%238fc320' opacity='0.3'/%3E%3Ctext x='300' y='200' text-anchor='middle' font-size='14' fill='%238fc320' font-weight='bold'%3E鼎为智慧%3C/text%3E%3C/svg%3E" alt="">
+          <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=1200&fit=max" alt="">
           <a href="#news">武汉鼎为智慧科技官网正式上线 <span>06-08</span></a>
         </div>
         <div class="new_con">
