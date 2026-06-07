@@ -3,801 +3,1077 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>武汉鼎为智慧科技有限公司 — AIOT · BMS · 智能传感方案</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>武汉鼎为智慧科技有限公司 — AIOT · BMS定位器 · 9DOF惯性传感方案</title>
+<meta name="description" content="武汉鼎为智慧科技有限公司，专注AIOT物联网、BMS定位器、9DOF惯性传感方案，提供软硬件定制研发服务。">
+<meta name="keywords" content="鼎为智慧, BMS定位器, 4G定位器, 9DOF, 惯性传感, AIOT, 物联网, 武汉">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0e17;
-    --bg-card: #111827;
-    --bg-card-hover: #1a2332;
-    --text: #e5e7eb;
-    --text-muted: #9ca3af;
-    --text-dim: #6b7280;
-    --accent: #3b82f6;
-    --accent-glow: rgba(59, 130, 246, 0.25);
-    --accent-2: #06b6d4;
-    --border: rgba(255,255,255,0.06);
-    --border-light: rgba(255,255,255,0.10);
-    --radius: 12px;
-    --radius-sm: 8px;
-  }
+/* ====== 全局 ====== */
+html, body {
+  font-family: 'Microsoft YaHei', '微软雅黑', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-size: 100%;
+  background: #fff;
+  overflow-x: hidden;
+}
+body a { transition: 0.5s all; }
+img { max-width: 100%; }
+ul { margin: 0; padding: 0; }
+a:hover, a:focus { text-decoration: none; }
 
-  * { margin:0; padding:0; box-sizing:border-box; }
+/* ====== Header ====== */
+.header {
+  position: fixed;
+  z-index: 10000;
+  width: 100%;
+  top: 0;
+}
+.top-header {
+  background: rgba(0,0,0,0.75);
+  padding: 0;
+}
+.top-header .container { position: relative; }
 
-  html { scroll-behavior:smooth; }
+.logo {
+  float: left;
+  padding: 12px 0;
+}
+.logo a {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo a:hover { color: #8fc320; text-decoration: none; }
+.logo .logo-icon {
+  width: 38px; height: 38px;
+  background: #8fc320;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: #fff;
+}
 
-  body {
-    font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
+/* Nav */
+.top-nav { float: right; }
+.top-nav ul { list-style: none; float: left; }
+.top-nav ul li {
+  float: left;
+  position: relative;
+}
+.top-nav ul li a {
+  color: #fff;
+  padding: 0 22px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 62px;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+}
+.top-nav ul li span { color: rgba(255,255,255,0.3); }
+.top-nav ul li a:hover { color: #8fc320; }
 
-  /* ---- Grid Background ---- */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: 
-      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-  }
+/* Dropdown */
+.top-nav ul li .sons {
+  display: none;
+  position: absolute;
+  left: 0;
+  min-width: 160px;
+  padding: 6px 0 12px;
+  background: #fff;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.top-nav ul li:hover .sons { display: block; }
+.top-nav ul li .sons a {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  line-height: 36px;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 2px 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: #666;
+  text-align: center;
+}
+.top-nav ul li .sons a span {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 4px;
+  line-height: 32px;
+  color: #555;
+}
+.top-nav ul li .sons a:hover span {
+  background: #8fc320;
+  color: #fff;
+}
 
-  /* ---- Navigation ---- */
-  nav {
-    position: fixed; top:0; left:0; right:0;
-    z-index: 100;
-    padding: 0 40px;
-    height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-    backdrop-filter: blur(20px);
-    background: rgba(10,14,23,0.75);
-    border-bottom: 1px solid var(--border);
-  }
+/* Mobile Nav */
+nav a#pull {
+  display: none;
+  position: absolute;
+  right: 0; top: 14px;
+  z-index: 200;
+}
+nav a#pull img { width: 24px; }
 
-  .nav-logo {
-    font-size: 1.25rem; font-weight: 700; color: #fff;
-    letter-spacing: 0.02em;
-    display: flex; align-items: center; gap: 10px;
+@media screen and (max-width: 768px) {
+  .top-nav { float: none; }
+  .top-nav ul { display: none; width: 100%; background: #fff; padding: 10px 0; }
+  .top-nav ul li { width: 100%; float: none; }
+  .top-nav ul li a {
+    color: #333; line-height: 40px;
+    display: block; text-align: left;
+    padding: 0 20px; border-bottom: 1px solid #eee;
   }
+  .top-nav ul li span { display: none; }
+  .top-nav ul li .sons {
+    position: static; box-shadow: none;
+    background: #f9f9f9; border-radius: 0;
+  }
+  .top-nav ul li .sons a { border-bottom: 1px solid #eee; }
+  nav a#pull { display: block; }
+}
+@media screen and (max-width: 480px) {
+  .logo a { font-size: 16px; }
+}
 
-  .nav-logo .icon {
-    width: 34px; height: 34px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 1rem; color: #fff;
-  }
+/* ====== Banner ====== */
+.banner {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  overflow: hidden;
+  min-height: 520px;
+  display: flex; align-items: center; justify-content: center;
+}
+.banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30Z' fill='rgba(255,255,255,0.02)'/%3E%3C/svg%3E") repeat;
+}
+.banner .banner-content {
+  position: relative; z-index: 1;
+  text-align: center; color: #fff;
+  padding: 120px 20px 80px;
+}
+.banner h1 {
+  font-size: 42px; font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+.banner h1 span { color: #8fc320; }
+.banner p {
+  font-size: 18px; color: rgba(255,255,255,0.7);
+  max-width: 650px; margin: 0 auto 36px;
+  line-height: 1.8;
+}
+.banner .banner-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.banner .btn-banner {
+  display: inline-block;
+  padding: 12px 36px;
+  border-radius: 4px;
+  font-size: 16px; font-weight: 600;
+  transition: all 0.3s;
+}
+.btn-banner-primary {
+  background: #8fc320; color: #fff;
+  border: 2px solid #8fc320;
+}
+.btn-banner-primary:hover {
+  background: #7ab01a; border-color: #7ab01a;
+  color: #fff; transform: translateY(-2px);
+}
+.btn-banner-outline {
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,0.4);
+}
+.btn-banner-outline:hover {
+  border-color: #8fc320; color: #8fc320;
+  transform: translateY(-2px);
+}
+@media (max-width: 768px) {
+  .banner { min-height: 400px; }
+  .banner h1 { font-size: 26px; letter-spacing: 2px; }
+  .banner p { font-size: 14px; }
+  .banner .banner-content { padding: 100px 15px 60px; }
+}
 
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    color: var(--text-muted); text-decoration: none;
-    font-size: 0.9rem; font-weight: 500;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: #fff; }
+/* ====== 业务支持（产品中心） ====== */
+.service {
+  padding: 0;
+  width: 100%;
+}
+.service .myTab_menu { background: #f5f5f5; }
+.service .nav-tabs {
+  width: 100%; max-width: 1200px;
+  margin: 0 auto; border: none;
+  display: flex;
+}
+.service .nav-tabs > li {
+  flex: 1; text-align: center;
+  border-left: 1px solid #e5e5e5;
+  margin: 0;
+}
+.service .nav-tabs > li:last-child { border-right: 1px solid #e5e5e5; }
+.service .nav-tabs > li > a {
+  display: block; min-height: 200px;
+  width: 100%; padding-top: 110px;
+  border: none !important; border-radius: 0 !important;
+  margin: 0; color: #555; font-size: 16px; font-weight: 700;
+  background-size: 48px !important;
+  background-position: center 42px !important;
+  background-repeat: no-repeat !important;
+  transition: all 0.3s;
+}
+.service .nav-tabs > li > a:hover { color: #333; background-color: transparent; }
+.service .nav-tabs > li.active > a {
+  color: #fff !important;
+  background-color: #8fc320 !important;
+  border: none !important;
+}
+.service .nav-tabs > li.menu1 a { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='20' fill='none' stroke='%23888' stroke-width='2'/%3E%3Ccircle cx='24' cy='24' r='6' fill='%23888'/%3E%3Cline x1='24' y1='4' x2='24' y2='14' stroke='%23888' stroke-width='2'/%3E%3Cline x1='4' y1='24' x2='14' y2='24' stroke='%23888' stroke-width='2'/%3E%3C/svg%3E"); }
+.service .nav-tabs > li.menu2 a { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='4' y='10' width='40' height='28' rx='4' fill='none' stroke='%23888' stroke-width='2'/%3E%3Crect x='10' y='16' width='12' height='16' rx='2' fill='%23888'/%3E%3Ccircle cx='32' cy='24' r='3' fill='%23888'/%3E%3C/svg%3E"); }
+.service .nav-tabs > li.menu3 a { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 4 L44 20 L24 36 L4 20Z' fill='none' stroke='%23888' stroke-width='2'/%3E%3Ccircle cx='24' cy='18' r='4' fill='%23888'/%3E%3C/svg%3E"); }
+.service .nav-tabs > li.menu4 a { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='8' y='8' width='32' height='32' rx='4' fill='none' stroke='%23888' stroke-width='2'/%3E%3Ccircle cx='20' cy='20' r='6' fill='%23888'/%3E%3Cline x1='34' y1='34' x2='28' y2='28' stroke='%23888' stroke-width='3'/%3E%3C/svg%3E"); }
 
-  /* ---- Section Container ---- */
-  section {
-    position: relative; z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 100px 40px;
-  }
+.service .tab-content {
+  padding: 80px 0;
+  max-width: 1200px; margin: 0 auto;
+}
+.service .tab-content .col-md-6 { padding: 0 15px; }
+.service .tab-content .tabimg img {
+  width: 100%; border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.tab_con_tit {
+  display: inline-block;
+  color: #333; font-size: 24px; font-weight: 700;
+  border-top: 3px solid #8fc320;
+  border-bottom: 3px solid #8fc320;
+  padding: 10px 0; margin-bottom: 20px;
+}
+.tab_con_tex {
+  color: #666; line-height: 2;
+  font-size: 15px; margin-bottom: 24px;
+}
+.tab_con_btn .tab_con_btnm {
+  display: inline-block;
+  width: 155px; height: 47px; line-height: 47px;
+  background: #8fc320; color: #fff;
+  border-radius: 4px; text-align: center;
+  font-size: 15px; font-weight: 600;
+  transition: all 0.3s;
+}
+.tab_con_btn .tab_con_btnm:hover { background: #7ab01a; color: #fff; }
 
-  /* ---- Hero ---- */
-  .hero {
-    padding-top: 180px;
-    text-align: center;
-    min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
+@media (max-width: 768px) {
+  .service .nav-tabs > li > a {
+    min-height: 110px; padding-top: 60px;
+    background-size: 32px !important;
+    background-position: center 16px !important;
+    font-size: 13px;
   }
+  .service .tab-content { padding: 40px 15px; }
+  .tab_con_tit { font-size: 20px; }
+}
 
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 16px;
-    border-radius: 999px;
-    background: rgba(59,130,246,0.1);
-    border: 1px solid rgba(59,130,246,0.25);
-    color: var(--accent);
-    font-size: 0.85rem; font-weight: 500;
-    margin-bottom: 32px;
-    letter-spacing: 0.05em;
+/* ====== 解决方案（应用领域） ====== */
+.work { background: #fafafa; }
+.work .myTab_menu2 {
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+}
+.work .myTab_menu2 .nav-tabs {
+  max-width: 1200px; margin: 0 auto;
+  border: none; display: flex;
+}
+.work .myTab_menu2 .nav-tabs > li {
+  flex: 1; height: 90px;
+}
+.work .myTab_menu2 .nav-tabs > li > a {
+  display: block; border: none !important;
+  border-radius: 0 !important;
+  line-height: 90px; font-size: 16px;
+  color: rgba(255,255,255,0.7); font-weight: 600;
+  padding: 0; margin: 0;
+  text-align: center;
+  transition: all 0.3s;
+}
+.work .myTab_menu2 .nav-tabs > li > a::after {
+  content: '';
+  display: inline-block;
+  width: 12px; height: 6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 6'%3E%3Cpath d='M0 0 L6 6 L12 0' fill='rgba(255,255,255,0.4)'/%3E%3C/svg%3E") center no-repeat;
+  margin-left: 6px;
+}
+.work .myTab_menu2 .nav-tabs > li.active > a {
+  background: #fff !important;
+  color: #8fc320 !important;
+}
+.work .myTab_menu2 .nav-tabs > li.active > a::after {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 6'%3E%3Cpath d='M0 0 L6 6 L12 0' fill='%238fc320'/%3E%3C/svg%3E") center no-repeat;
+}
+.work .tab-content {
+  padding: 60px 0 80px;
+}
+.work .tab-content .tab_con_tex1 {
+  color: #333; font-size: 28px; font-weight: 700;
+  padding: 20px 0; text-align: center;
+}
+.work .tab-content .tab_con_tex2 {
+  color: #888; font-size: 15px;
+  margin: 0 auto 30px; line-height: 2;
+  text-align: center; max-width: 700px;
+}
+.work .tab-content .works-grid img {
+  width: 100%; max-height: 400px;
+  object-fit: cover; border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transition: transform 0.8s;
+}
+.work .tab-content .works-grid:hover img {
+  transform: scale(1.03);
+}
+@media (max-width: 768px) {
+  .work .myTab_menu2 .nav-tabs > li > a {
+    font-size: 12px; line-height: 60px;
   }
+  .work .myTab_menu2 .nav-tabs > li { height: 60px; }
+}
 
-  .hero-badge .dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent); animation: pulse-dot 2s infinite;
-  }
-  @keyframes pulse-dot {
-    0%,100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
+/* ====== 关于我们 ====== */
+.about {
+  padding: 80px 0;
+  text-align: center;
+}
+.about_con h2 {
+  font-size: 32px; font-weight: 700;
+  color: #333; margin-bottom: 30px;
+}
+.about_con h2::after {
+  content: ''; display: block;
+  width: 60px; height: 3px;
+  background: #8fc320; margin: 16px auto 0;
+}
+.about_con p {
+  color: #666; font-size: 16px;
+  line-height: 2; max-width: 800px;
+  margin: 0 auto 12px;
+}
+.about_more {
+  display: inline-block; margin-top: 30px;
+  padding: 12px 40px; border: 2px solid #8fc320;
+  color: #8fc320; border-radius: 4px;
+  font-size: 15px; font-weight: 600;
+  transition: all 0.3s;
+}
+.about_more:hover {
+  background: #8fc320; color: #fff;
+  text-decoration: none;
+}
 
-  .hero h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin-bottom: 24px;
-    max-width: 800px;
-  }
+/* ====== 核心优势 ====== */
+.advantages {
+  padding: 60px 0 80px;
+  background: #f9f9f9;
+}
+.advantages .section-title {
+  text-align: center; margin-bottom: 50px;
+}
+.advantages .section-title h2 {
+  font-size: 30px; font-weight: 700; color: #333;
+  margin-bottom: 12px;
+}
+.advantages .section-title h2::after {
+  content: ''; display: block;
+  width: 50px; height: 3px;
+  background: #8fc320; margin: 14px auto 0;
+}
+.advantages .section-title p { color: #888; font-size: 15px; }
 
-  .hero h1 .gradient {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+.adv-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1200px; margin: 0 auto; padding: 0 15px;
+}
+.adv-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 40px 24px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: all 0.3s;
+  border: 1px solid transparent;
+}
+.adv-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  border-color: #8fc320;
+}
+.adv-card .adv-icon {
+  font-size: 42px; margin-bottom: 18px;
+}
+.adv-card h3 {
+  font-size: 18px; font-weight: 700;
+  color: #333; margin-bottom: 10px;
+}
+.adv-card p {
+  color: #888; font-size: 14px; line-height: 1.8;
+}
+@media (max-width: 992px) { .adv-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 576px) { .adv-grid { grid-template-columns: 1fr; } }
 
-  .hero p {
-    font-size: 1.15rem;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin-bottom: 48px;
-    line-height: 1.8;
-  }
+/* ====== 新闻中心 ====== */
+.news {
+  padding: 80px 0;
+  background: #fff;
+}
+.news .news-header {
+  text-align: center; margin-bottom: 50px;
+}
+.news .news-header h2 {
+  font-size: 30px; font-weight: 700; color: #333;
+}
+.news .news-header h2::after {
+  content: ''; display: block;
+  width: 50px; height: 3px;
+  background: #8fc320; margin: 14px auto 0;
+}
+.news .news-header .news_des {
+  color: #888; font-size: 15px;
+  margin-top: 12px;
+}
 
-  .hero-actions {
-    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
-  }
+.new_box { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+.new_wrap {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+.new_top {
+  border-bottom: 2px solid #8fc320;
+  padding-bottom: 12px; margin-bottom: 20px;
+}
+.new_top p { font-size: 18px; font-weight: 700; color: #333; margin: 0; }
+.new_top a { color: #8fc320; font-size: 14px; font-weight: 600; margin-top: 4px; }
 
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 14px 28px;
-    border-radius: var(--radius-sm);
-    font-size: 0.95rem; font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-    cursor: pointer;
-    border: none;
-    letter-spacing: 0.01em;
-  }
+.new_sbox { padding: 16px 0; border-bottom: 1px dashed #e0e0e0; }
+.new_sbox:last-child { border-bottom: none; }
+.new_sbox a { display: flex; gap: 16px; align-items: flex-start; }
+.new_sbox .fl img {
+  width: 140px; height: 95px; object-fit: cover;
+  border-radius: 4px; flex-shrink: 0;
+}
+.new_sbox .fr { flex: 1; min-width: 0; }
+.news_title {
+  font-size: 15px; font-weight: 600; color: #333;
+  line-height: 1.6; margin-bottom: 6px;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.news_description {
+  font-size: 13px; color: #999; line-height: 1.6;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+@media (max-width: 768px) {
+  .new_sbox a { flex-direction: column; }
+  .new_sbox .fl img { width: 100%; height: auto; max-height: 180px; }
+}
 
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #2563eb);
-    color: #fff;
-    box-shadow: 0 0 30px var(--accent-glow);
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 45px rgba(59,130,246,0.4);
-  }
+/* 公司新闻列表 */
+.hotnews { margin-bottom: 16px; }
+.hotnews img {
+  width: 100%; max-height: 200px; object-fit: cover;
+  border-radius: 4px; margin-bottom: 10px;
+}
+.hotnews a {
+  display: block; font-size: 15px; font-weight: 600;
+  color: #333; line-height: 1.6;
+}
+.hotnews a span { color: #999; font-size: 13px; font-weight: 400; }
+.new_con ul { list-style: none; }
+.new_con ul li {
+  padding: 10px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+.new_con ul li:last-child { border-bottom: none; }
+.new_con ul li a {
+  display: flex; justify-content: space-between;
+  color: #555; font-size: 14px; line-height: 1.6;
+}
+.new_con ul li a:hover { color: #8fc320; }
+.new_con ul li a .data { color: #999; font-size: 12px; flex-shrink: 0; margin-left: 12px; }
 
-  .btn-outline {
-    background: transparent;
-    color: #fff;
-    border: 1px solid var(--border-light);
-  }
-  .btn-outline:hover {
-    background: rgba(255,255,255,0.04);
-  }
+/* ====== 联系我们 ====== */
+.contact {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+}
+.contact h2 {
+  text-align: center; font-size: 30px; font-weight: 700;
+  color: #333; margin-bottom: 12px;
+}
+.contact h2::after {
+  content: ''; display: block;
+  width: 50px; height: 3px;
+  background: #8fc320; margin: 14px auto 0;
+}
+.contact .contact-sub {
+  text-align: center; color: #888;
+  font-size: 15px; margin-bottom: 50px;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px; margin: 0 auto; padding: 0 15px;
+}
+.contact-card {
+  background: #fff; border-radius: 8px;
+  padding: 36px 28px; text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: all 0.3s;
+}
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+.contact-card .ci-icon {
+  font-size: 36px; margin-bottom: 16px;
+}
+.contact-card h4 {
+  font-size: 17px; font-weight: 700; color: #333;
+  margin-bottom: 8px;
+}
+.contact-card p {
+  color: #666; font-size: 15px; line-height: 1.8;
+}
+@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
 
-  /* ---- Section Headers ---- */
-  .section-label {
-    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
+/* ====== Footer ====== */
+.footer {
+  background: #1a1a2e;
+  color: rgba(255,255,255,0.6);
+  padding: 40px 0 30px;
+  text-align: center;
+}
+.footer .footer-links {
+  display: flex; gap: 30px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 20px;
+}
+.footer .footer-links a {
+  color: rgba(255,255,255,0.5);
+  font-size: 14px; transition: color 0.3s;
+}
+.footer .footer-links a:hover { color: #8fc320; }
+.footer .footer-info {
+  font-size: 13px; line-height: 2;
+}
+.footer .footer-info span { color: #8fc320; }
 
-  .section-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
-    line-height: 1.3;
-  }
+/* ====== 侧边导航 ====== */
+.floor_tip {
+  position: fixed; right: 20px; top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  display: none;
+}
+.floor_tip ul { list-style: none; }
+.floor_tip ul li { margin-bottom: 8px; }
+.floor_tip ul li a {
+  display: block; width: 12px; height: 12px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  text-indent: -9999px;
+  transition: all 0.3s;
+}
+.floor_tip ul li.active a {
+  background: #8fc320;
+  box-shadow: 0 0 8px rgba(143,195,32,0.5);
+}
+.floor_tip ul li a:hover { background: #8fc320; }
 
-  .section-desc {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-    max-width: 600px;
-    margin-bottom: 56px;
-    line-height: 1.8;
-  }
+@media (min-width: 992px) { .floor_tip { display: block; } }
 
-  /* ---- Stats ---- */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 24px;
-    margin-bottom: 80px;
-  }
-  @media (max-width: 768px) {
-    .stats-grid { grid-template-columns: repeat(2,1fr); }
-  }
-
-  .stat-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px 24px;
-    text-align: center;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .stat-card:hover {
-    border-color: var(--border-light);
-    transform: translateY(-4px);
-  }
-
-  .stat-number {
-    font-size: 2.2rem; font-weight: 800;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.2;
-  }
-
-  .stat-label {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: 8px;
-    font-weight: 500;
-  }
-
-  /* ---- Business Cards ---- */
-  .cards-3 {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 24px;
-  }
-  @media (max-width: 900px) {
-    .cards-3 { grid-template-columns: 1fr; }
-  }
-
-  .biz-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 40px 32px;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .biz-card::before {
-    content: '';
-    position: absolute; top:0; left:0; right:0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .biz-card:hover::before { opacity: 1; }
-  .biz-card:hover {
-    border-color: var(--border-light);
-    transform: translateY(-4px);
-    background: var(--bg-card-hover);
-  }
-
-  .biz-card .icon-box {
-    width: 48px; height: 48px;
-    border-radius: var(--radius-sm);
-    background: rgba(59,130,246,0.1);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem;
-    margin-bottom: 24px;
-  }
-
-  .biz-card h3 {
-    font-size: 1.25rem; font-weight: 600;
-    margin-bottom: 12px;
-    letter-spacing: -0.01em;
-  }
-
-  .biz-card p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  .biz-card .tags {
-    display: flex; flex-wrap: wrap; gap: 8px;
-  }
-
-  .tag {
-    padding: 4px 12px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
-
-  /* ---- Feature List ---- */
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 16px;
-  }
-  @media (max-width: 768px) {
-    .feature-grid { grid-template-columns: 1fr; }
-  }
-
-  .feature-item {
-    display: flex; gap: 16px;
-    padding: 24px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: border-color 0.3s;
-  }
-  .feature-item:hover { border-color: var(--border-light); }
-
-  .feature-item .check {
-    flex-shrink: 0;
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: rgba(6,182,212,0.15);
-    color: var(--accent-2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem; font-weight: 700;
-  }
-
-  .feature-item h4 {
-    font-size: 0.95rem; font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .feature-item p {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    line-height: 1.6;
-  }
-
-  /* ---- Application Areas ---- */
-  .areas-grid {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 16px;
-  }
-  @media (max-width: 768px) {
-    .areas-grid { grid-template-columns: repeat(2,1fr); }
-  }
-
-  .area-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px 20px;
-    text-align: center;
-    transition: all 0.3s;
-  }
-  .area-card:hover {
-    border-color: rgba(59,130,246,0.4);
-    transform: translateY(-2px);
-  }
-  .area-card .emoji { font-size: 2rem; margin-bottom: 12px; }
-  .area-card .title {
-    font-weight: 600; font-size: 0.95rem;
-    margin-bottom: 6px;
-  }
-  .area-card .sub {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-  }
-
-  /* ---- Contact ---- */
-  .contact-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-  }
-  @media (max-width: 768px) {
-    .contact-wrapper { grid-template-columns: 1fr; }
-  }
-
-  .contact-info h3 {
-    font-size: 1.5rem; font-weight: 700;
-    margin-bottom: 12px;
-  }
-
-  .contact-info p {
-    color: var(--text-muted);
-    margin-bottom: 32px;
-    line-height: 1.8;
-  }
-
-  .contact-item {
-    display: flex; gap: 16px; align-items: flex-start;
-    margin-bottom: 24px;
-  }
-
-  .contact-item .ci-icon {
-    width: 40px; height: 40px;
-    border-radius: var(--radius-sm);
-    background: rgba(59,130,246,0.1);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    font-size: 1.1rem;
-  }
-
-  .contact-item .label {
-    font-size: 0.78rem; color: var(--text-dim);
-    text-transform: uppercase; letter-spacing: 0.08em;
-    margin-bottom: 2px;
-  }
-  .contact-item .val {
-    font-weight: 500;
-  }
-
-  .contact-form {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 40px;
-  }
-
-  .contact-form .field {
-    margin-bottom: 20px;
-  }
-
-  .contact-form label {
-    display: block;
-    font-size: 0.85rem; font-weight: 500;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-
-  .contact-form input, .contact-form textarea {
-    width: 100%;
-    padding: 12px 16px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    color: #fff;
-    font-family: inherit;
-    font-size: 0.95rem;
-    transition: border-color 0.2s;
-    outline: none;
-  }
-  .contact-form input:focus, .contact-form textarea:focus {
-    border-color: var(--accent);
-  }
-  .contact-form textarea { resize: vertical; min-height: 120px; }
-
-  /* ---- Footer ---- */
-  footer {
-    position: relative; z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 40px;
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 0.85rem;
-  }
-
-  footer .footer-links {
-    display: flex; gap: 24px; justify-content: center;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-
-  footer .footer-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  footer .footer-links a:hover { color: #fff; }
-
-  /* ---- Responsive Nav ---- */
-  @media (max-width: 768px) {
-    nav { padding: 0 20px; }
-    .nav-links { display: none; }
-  }
-
-  /* ---- Animations ---- */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .anim { animation: fadeUp 0.8s ease-out both; }
-  .anim-delay-1 { animation-delay: 0.1s; }
-  .anim-delay-2 { animation-delay: 0.2s; }
-  .anim-delay-3 { animation-delay: 0.3s; }
-  .anim-delay-4 { animation-delay: 0.4s; }
-  .anim-delay-5 { animation-delay: 0.5s; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .anim, [class*="anim-delay"] { animation: none; }
-    html { scroll-behavior: auto; }
-  }
+/* ====== 动画 ====== */
+[data-scroll-reveal] { visibility: hidden; }
+.sr-visible { visibility: visible; }
 </style>
 </head>
-<body>
+<body data-spy="scroll" data-target="#myScrollspy">
 
-<!-- Navigation -->
-<nav>
-  <div class="nav-logo">
-    <span class="icon">鼎</span>
-    鼎为智慧
-  </div>
-  <ul class="nav-links">
-    <li><a href="#about">关于我们</a></li>
-    <li><a href="#business">核心业务</a></li>
-    <li><a href="#capability">技术能力</a></li>
-    <li><a href="#contact">联系我们</a></li>
-  </ul>
-</nav>
-
-<!-- Hero -->
-<section class="hero anim">
-  <div class="hero-badge anim anim-delay-1">
-    <span class="dot"></span> AIOT · 智能感知 · 万物互联
-  </div>
-  <h1 class="anim anim-delay-1">
-    以<span class="gradient">智慧感知</span><br>驱动万物互联
-  </h1>
-  <p class="anim anim-delay-2">
-    武汉鼎为智慧科技有限公司，专注于 AIOT 智能物联网、BMS 定位追踪系统、
-    9DOF 惯性传感解决方案，为全球客户提供软硬件一体化的定制研发服务。
-  </p>
-  <div class="hero-actions anim anim-delay-3">
-    <a href="#business" class="btn btn-primary">了解核心业务</a>
-    <a href="#contact" class="btn btn-outline">联系我们</a>
-  </div>
-</section>
-
-<!-- About Section -->
-<section id="about">
-  <div class="section-label">关于我们</div>
-  <h2 class="section-title">立足武汉 · 服务全球</h2>
-  <p class="section-desc">
-    鼎为智慧汇聚物联网、嵌入式系统、人工智能领域资深研发团队，
-    致力于为企业客户提供从芯片到云端的全链路技术解决方案。
-  </p>
-
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-number">100+</div>
-      <div class="stat-label">交付项目</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">30+</div>
-      <div class="stat-label">技术专利</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">50+</div>
-      <div class="stat-label">服务客户</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-number">10年+</div>
-      <div class="stat-label">行业经验</div>
+<!-- ====== Header ====== -->
+<div class="header">
+  <div class="top-header">
+    <div class="container">
+      <div class="logo">
+        <a href="#banner">
+          <span class="logo-icon">鼎</span> 鼎为智慧科技
+        </a>
+      </div>
+      <nav class="top-nav">
+        <ul>
+          <li><a href="#banner">首页</a><span>|</span></li>
+          <li>
+            <a href="#service">产品中心</a><span>|</span>
+            <div class="sons">
+              <a href="#service"><span>BMS定位器</span></a>
+              <a href="#service"><span>4G智能中控</span></a>
+              <a href="#service"><span>9DOF惯性传感</span></a>
+              <a href="#service"><span>AIOT物联平台</span></a>
+            </div>
+          </li>
+          <li>
+            <a href="#work">解决方案</a><span>|</span>
+            <div class="sons">
+              <a href="#work"><span>二轮车BMS定位</span></a>
+              <a href="#work"><span>设备物联定位</span></a>
+              <a href="#work"><span>惯性导航方案</span></a>
+              <a href="#work"><span>智慧物联定制</span></a>
+            </div>
+          </li>
+          <li><a href="#news">新闻中心</a><span>|</span></li>
+          <li><a href="#about">关于我们</a><span>|</span></li>
+          <li><a href="#contact">联系我们</a></li>
+        </ul>
+        <a href="javascript:void(0);" id="pull"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Crect y='3' width='24' height='3' rx='1'/%3E%3Crect y='10' width='24' height='3' rx='1'/%3E%3Crect y='17' width='24' height='3' rx='1'/%3E%3C/svg%3E" alt="menu"></a>
+      </nav>
+      <div class="clearfix"></div>
     </div>
   </div>
+</div>
 
-  <div class="feature-grid">
-    <div class="feature-item">
-      <div class="check">✓</div>
-      <div>
-        <h4>软硬件一体化</h4>
-        <p>从嵌入式固件到云端平台，提供完整的端到端技术栈研发服务</p>
-      </div>
-    </div>
-    <div class="feature-item">
-      <div class="check">✓</div>
-      <div>
-        <h4>自主核心技术</h4>
-        <p>拥有 9DOF 惯性导航、BMS 电池管理等多项自主知识产权技术</p>
-      </div>
-    </div>
-    <div class="feature-item">
-      <div class="check">✓</div>
-      <div>
-        <h4>快速定制交付</h4>
-        <p>敏捷开发流程，支持硬件原型 4-8 周快速验证与迭代</p>
-      </div>
-    </div>
-    <div class="feature-item">
-      <div class="check">✓</div>
-      <div>
-        <h4>全球技术支持</h4>
-        <p>技术进出口资质完备，为海内外客户提供全生命周期技术支持</p>
-      </div>
+<!-- ====== Banner ====== -->
+<div class="banner" id="banner">
+  <div class="banner-content">
+    <h1 data-scroll-reveal="enter bottom and move 30px over 0.6s">武汉<span>鼎为智慧</span>科技有限公司</h1>
+    <p data-scroll-reveal="enter bottom and move 30px over 0.8s">
+      专注 AIOT 物联网 · BMS 定位器 · 9DOF 惯性传感<br>
+      提供嵌入式软硬件一体化解决方案
+    </p>
+    <div class="banner-btns" data-scroll-reveal="enter bottom and move 30px over 1s">
+      <a href="#service" class="btn-banner btn-banner-primary">查看产品</a>
+      <a href="#contact" class="btn-banner btn-banner-outline">联系我们</a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- Core Business Section -->
-<section id="business">
-  <div class="section-label">核心业务</div>
-  <h2 class="section-title">四大业务板块</h2>
-  <p class="section-desc">
-    聚焦 AIOT 与智能感知领域，四大核心业务线覆盖从硬件设计到云端平台的完整技术链路
-  </p>
-
-  <div class="cards-3">
-    <!-- AIOT -->
-    <div class="biz-card">
-      <div class="icon-box">🔗</div>
-      <h3>AIOT 智能物联网</h3>
-      <p>人工智能与物联网深度融合，提供智能家居、智慧工厂、智慧园区的端到端解决方案，包括设备接入、数据处理、AI 决策与控制执行。</p>
-      <div class="tags">
-        <span class="tag">IoT 平台</span>
-        <span class="tag">边缘计算</span>
-        <span class="tag">AI 算法</span>
-        <span class="tag">设备管理</span>
-      </div>
-    </div>
-
-    <!-- BMS -->
-    <div class="biz-card">
-      <div class="icon-box">🔋</div>
-      <h3>BMS 定位追踪系统</h3>
-      <p>自主研发的电池管理系统与定位追踪一体化方案，支持 NB-IoT / Cat.1 / LoRa 多模通信，适用于电动车、储能、资产追踪等场景。</p>
-      <div class="tags">
-        <span class="tag">电池管理</span>
-        <span class="tag">GPS/北斗</span>
-        <span class="tag">NB-IoT</span>
-        <span class="tag">远程监控</span>
-      </div>
-    </div>
-
-    <!-- 9DOF -->
-    <div class="biz-card">
-      <div class="icon-box">🧭</div>
-      <h3>9DOF 惯性传感方案</h3>
-      <p>基于高精度 9 轴 IMU 的惯性导航与姿态感知系统，融合传感器融合算法，应用于无人机、机器人、可穿戴设备、运动捕捉等领域。</p>
-      <div class="tags">
-        <span class="tag">9轴 IMU</span>
-        <span class="tag">姿态解算</span>
-        <span class="tag">卡尔曼滤波</span>
-        <span class="tag">运动捕捉</span>
-      </div>
-    </div>
+<div id="myScrollspy">
+<!-- ====== 产品中心 ====== -->
+<div class="service" id="service">
+  <div class="myTab_menu">
+    <ul id="myTab" class="nav nav-tabs">
+      <li class="active menu1"><a href="#product1" data-toggle="tab">BMS 定位器</a></li>
+      <li class="menu2"><a href="#product2" data-toggle="tab">4G 智能中控</a></li>
+      <li class="menu3"><a href="#product3" data-toggle="tab">9DOF 惯性传感</a></li>
+      <li class="menu4"><a href="#product4" data-toggle="tab">AIOT 物联平台</a></li>
+    </ul>
   </div>
-
-  <div style="margin-top: 24px;" class="cards-3">
-    <!-- Custom -->
-    <div class="biz-card" style="grid-column: 1 / -1; max-width: 500px; margin: 0 auto;">
-      <div class="icon-box">⚙️</div>
-      <h3>软硬件方案定制</h3>
-      <p>根据客户需求进行原理图设计、PCB Layout、嵌入式固件开发、云端平台搭建的全流程定制服务，覆盖消费电子、工业控制、智能穿戴等领域。</p>
-      <div class="tags">
-        <span class="tag">原理图设计</span>
-        <span class="tag">PCB Layout</span>
-        <span class="tag">嵌入式开发</span>
-        <span class="tag">云平台</span>
+  <div id="myTabContent" class="tab-content container">
+    <!-- Product 1 -->
+    <div class="tab-pane fade in active" id="product1">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tabimg">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23e8f5e9'/%3E%3Crect x='180' y='60' width='240' height='280' rx='12' fill='%238fc320' opacity='0.15'/%3E%3Crect x='200' y='120' width='200' height='160' rx='8' fill='%238fc320' opacity='0.3'/%3E%3Ccircle cx='300' cy='180' r='30' fill='%238fc320'/%3E%3Ctext x='300' y='250' text-anchor='middle' font-size='14' fill='%238fc320' font-weight='bold'%3EBMS 定位器%3C/text%3E%3C/svg%3E" alt="BMS定位器">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p class="tab_con_tit">BMS 定位器</p>
+          <p class="tab_con_tex">
+            自主研发 4G BMS 跟踪器主板，支持段码液晶显示与触摸按键，集成 SPEAKER 和 485 通讯接口。<br>
+            兼容主流锂电/铅酸 BMS 通讯协议，实时采集电池电压、温度、SOC、循环次数等数据，<br>
+            通过 4G 网络上传至云端平台，实现电池全生命周期管理。
+          </p>
+          <div class="tab_con_btn"><a href="#contact" class="tab_con_btnm">了解更多</a></div>
+        </div>
+      </div>
+    </div>
+    <!-- Product 2 -->
+    <div class="tab-pane fade" id="product2">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tabimg">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23e3f2fd'/%3E%3Crect x='150' y='40' width='300' height='320' rx='12' fill='%231976d2' opacity='0.1'/%3E%3Ccircle cx='300' cy='140' r='50' fill='none' stroke='%231976d2' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='300' cy='140' r='30' fill='%231976d2' opacity='0.2'/%3E%3Ccircle cx='300' cy='140' r='10' fill='%238fc320'/%3E%3Ctext x='300' y='280' text-anchor='middle' font-size='14' fill='%23555' font-weight='bold'%3E4G 智能中控%3C/text%3E%3C/svg%3E" alt="4G智能中控">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p class="tab_con_tit">4G 智能中控</p>
+          <p class="tab_con_tex">
+            集成 GPS 实时定位、蓝牙通信、姿态检测、防盗报警等功能。<br>
+            通过 4G 网络和蓝牙分别与云端平台、手机 APP 进行数据交互，<br>
+            实时上传车辆状态至服务器，支持远程控车、电子围栏、轨迹回放。<br>
+            安装简便，只需线束对插即可完成升级。
+          </p>
+          <div class="tab_con_btn"><a href="#contact" class="tab_con_btnm">了解更多</a></div>
+        </div>
+      </div>
+    </div>
+    <!-- Product 3 -->
+    <div class="tab-pane fade" id="product3">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tabimg">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23fff3e0'/%3E%3Cpath d='M300 50 L380 150 L350 350 L250 350 L220 150Z' fill='%23ff9800' opacity='0.12'/%3E%3Ccircle cx='300' cy='150' r='8' fill='%23ff9800' opacity='0.5'/%3E%3Ccircle cx='260' cy='200' r='6' fill='%23ff9800' opacity='0.4'/%3E%3Ccircle cx='340' cy='180' r='7' fill='%23ff9800' opacity='0.3'/%3E%3Ctext x='300' y='300' text-anchor='middle' font-size='14' fill='%238fc320' font-weight='bold'%3E9DOF 传感器%3C/text%3E%3C/svg%3E" alt="9DOF惯性传感">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p class="tab_con_tit">9DOF 惯性传感模组</p>
+          <p class="tab_con_tex">
+            9 轴（3 轴加速度 + 3 轴陀螺仪 + 3 轴磁力计）惯性测量单元，<br>
+            内置姿态解算算法，支持 AHRS 航姿参考。<br>
+            适用于车辆姿态检测、碰撞识别、运动轨迹分析等场景，<br>
+            提供 I²C / SPI / UART 多种接口，方便嵌入式集成。
+          </p>
+          <div class="tab_con_btn"><a href="#contact" class="tab_con_btnm">了解更多</a></div>
+        </div>
+      </div>
+    </div>
+    <!-- Product 4 -->
+    <div class="tab-pane fade" id="product4">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tabimg">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23f3e5f5'/%3E%3Ccircle cx='140' cy='120' r='40' fill='%238fc320' opacity='0.15'/%3E%3Ccircle cx='460' cy='120' r='40' fill='%238fc320' opacity='0.15'/%3E%3Ccircle cx='300' cy='200' r='50' fill='%238fc320' opacity='0.2'/%3E%3Cline x1='180' y1='120' x2='250' y2='200' stroke='%238fc320' stroke-width='2' opacity='0.3'/%3E%3Cline x1='420' y1='120' x2='350' y2='200' stroke='%238fc320' stroke-width='2' opacity='0.3'/%3E%3Ctext x='300' y='320' text-anchor='middle' font-size='14' fill='%238fc320' font-weight='bold'%3EAIOT 云平台%3C/text%3E%3C/svg%3E" alt="AIOT物联平台">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p class="tab_con_tit">AIOT 物联平台</p>
+          <p class="tab_con_tex">
+            自研物联网云平台，支持百万级设备并发接入。<br>
+            提供设备管理、数据可视化、远程 OTA 升级、异常告警等功能。<br>
+            支持 MQTT / CoAP / HTTP 协议，可对接主流第三方平台，<br>
+            为智慧出行、资产追踪、能源管理提供数据底座。
+          </p>
+          <div class="tab_con_btn"><a href="#contact" class="tab_con_btnm">了解更多</a></div>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- Application Areas -->
-<section id="capability">
-  <div class="section-label">应用领域</div>
-  <h2 class="section-title">技术落地场景</h2>
-  <p class="section-desc">
-    我们的技术方案已在多个行业得到验证和应用
-  </p>
-
-  <div class="areas-grid">
-    <div class="area-card">
-      <div class="emoji">🚗</div>
-      <div class="title">智慧出行</div>
-      <div class="sub">电动车 BMS · 共享出行定位</div>
-    </div>
-    <div class="area-card">
-      <div class="emoji">🏭</div>
-      <div class="title">智能制造</div>
-      <div class="sub">工业物联网 · 预测性维护</div>
-    </div>
-    <div class="area-card">
-      <div class="emoji">🤖</div>
-      <div class="title">机器人</div>
-      <div class="sub">IMU 导航 · 姿态控制</div>
-    </div>
-    <div class="area-card">
-      <div class="emoji">⌚</div>
-      <div class="title">可穿戴设备</div>
-      <div class="sub">运动追踪 · 健康监测</div>
-    </div>
-    <div class="area-card">
-      <div class="emoji">📦</div>
-      <div class="title">物流追踪</div>
-      <div class="sub">资产定位 · 冷链监控</div>
-    </div>
-    <div class="area-card">
-      <div class="emoji">🏠</div>
-      <div class="title">智慧楼宇</div>
-      <div class="sub">能耗管理 · 智能控制</div>
-    </div>
-    <div class="area-card">
-      <div class="emoji">🛩️</div>
-      <div class="title">无人机</div>
-      <div class="sub">飞控 IMU · 惯性导航</div>
-    </div>
-    <div class="area-card">
-      <div class="emoji">🔬</div>
-      <div class="title">科研仪器</div>
-      <div class="sub">高精度传感 · 数据采集</div>
-    </div>
+<!-- ====== 解决方案 ====== -->
+<div class="work" id="work">
+  <div class="myTab_menu2">
+    <ul id="myTab2" class="nav nav-tabs">
+      <li class="active"><a href="#sol1" data-toggle="tab">二轮车 BMS 定位方案</a></li>
+      <li><a href="#sol2" data-toggle="tab">设备物联定位方案</a></li>
+      <li><a href="#sol3" data-toggle="tab">惯性导航方案</a></li>
+      <li><a href="#sol4" data-toggle="tab">智慧物联定制方案</a></li>
+    </ul>
   </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact">
-  <div class="section-label">联系我们</div>
-  <h2 class="section-title">开启合作</h2>
-  <p class="section-desc">
-    无论您是寻找技术方案还是寻求研发合作，我们的团队随时欢迎您的咨询
-  </p>
-
-  <div class="contact-wrapper">
-    <div class="contact-info">
-      <h3>武汉鼎为智慧科技有限公司</h3>
-      <p>
-        Wuhan Dingwei Smart Technology Co., Ltd.
+  <div id="myTab2Content" class="tab-content container">
+    <div class="tab-pane fade in active" id="sol1">
+      <p class="tab_con_tex1" data-scroll-reveal="enter bottom and move 20px over 0.6s">二轮车 BMS 定位方案</p>
+      <p class="tab_con_tex2" data-scroll-reveal="enter bottom and move 20px over 0.8s">
+        针对电动自行车/摩托车换电与共享出行场景，集成 4G 定位 + BMS 数据采集，<br>
+        实现电池状态实时监控、异常预警、远程锁车等功能
       </p>
+      <div class="works-grids" data-scroll-reveal="enter left and move 100px over 1s">
+        <a href="#contact">
+          <div class="works-grid">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e8f5e9'/%3E%3Cstop offset='100%25' style='stop-color:%23c8e6c9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='400' fill='url(%23g)'/%3E%3Crect x='80' y='100' width='200' height='120' rx='10' fill='%238fc320' opacity='0.15'/%3E%3Ccircle cx='180' cy='180' r='20' fill='%238fc320' opacity='0.4'/%3E%3Crect x='340' y='140' width='150' height='10' rx='5' fill='%238fc320' opacity='0.2'/%3E%3Crect x='340' y='170' width='200' height='8' rx='4' fill='%238fc320' opacity='0.1'/%3E%3Ctext x='600' y='220' text-anchor='middle' font-size='18' fill='%238fc320' font-weight='bold'%3E🔋 实时电池监控 → 云端数据分析 → 智能运维调度%3C/text%3E%3C/svg%3E" alt="二轮车BMS定位方案">
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="sol2">
+      <p class="tab_con_tex1" data-scroll-reveal="enter bottom and move 20px over 0.6s">设备物联定位方案</p>
+      <p class="tab_con_tex2" data-scroll-reveal="enter bottom and move 20px over 0.8s">
+        为工业设备、物流载具、工程机械提供 4G 定位终端，<br>
+        支持 GPS / BDS / GLONASS 多模定位，结合电子围栏与轨迹回放，实现资产全程可追溯
+      </p>
+      <div class="works-grids" data-scroll-reveal="enter left and move 100px over 1s">
+        <a href="#contact">
+          <div class="works-grid">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e3f2fd'/%3E%3Cstop offset='100%25' style='stop-color:%23bbdefb'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='400' fill='url(%23g2)'/%3E%3Ccircle cx='200' cy='160' r='50' fill='none' stroke='%238fc320' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='200' cy='160' r='25' fill='%238fc320' opacity='0.15'/%3E%3Ccircle cx='200' cy='160' r='10' fill='%238fc320' opacity='0.4'/%3E%3Ccircle cx='600' cy='120' r='30' fill='%238fc320' opacity='0.1'/%3E%3Ccircle cx='850' cy='180' r='40' fill='none' stroke='%238fc320' stroke-width='1.5' opacity='0.2'/%3E%3Ctext x='600' y='280' text-anchor='middle' font-size='18' fill='%238fc320' font-weight='bold'%3E📍 多模定位 + 电子围栏 + 轨迹回放 → 资产全程可追溯%3C/text%3E%3C/svg%3E" alt="设备物联定位方案">
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="sol3">
+      <p class="tab_con_tex1" data-scroll-reveal="enter bottom and move 20px over 0.6s">惯性导航方案</p>
+      <p class="tab_con_tex2" data-scroll-reveal="enter bottom and move 20px over 0.8s">
+        基于 9DOF IMU 的惯性导航与姿态感知方案，<br>
+        适用于 GNSS 信号遮挡环境（隧道、地库），提供高精度航位推算与碰撞检测
+      </p>
+      <div class="works-grids" data-scroll-reveal="enter left and move 100px over 1s">
+        <a href="#contact">
+          <div class="works-grid">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fff3e0'/%3E%3Cstop offset='100%25' style='stop-color:%23ffe0b2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='400' fill='url(%23g3)'/%3E%3Cpath d='M200 300 Q350 100 600 200 Q850 300 1000 150' fill='none' stroke='%238fc320' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='200' cy='300' r='8' fill='%238fc320' opacity='0.5'/%3E%3Ccircle cx='1000' cy='150' r='8' fill='%238fc320' opacity='0.5'/%3E%3Cpolygon points='1000,150 990,140 985,150 990,160' fill='%238fc320' opacity='0.4'/%3E%3Ctext x='600' y='360' text-anchor='middle' font-size='18' fill='%238fc320' font-weight='bold'%3E🧭 9DOF IMU → 姿态解算 → 航位推算 → 碰撞检测%3C/text%3E%3C/svg%3E" alt="惯性导航方案">
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="sol4">
+      <p class="tab_con_tex1" data-scroll-reveal="enter bottom and move 20px over 0.6s">智慧物联定制方案</p>
+      <p class="tab_con_tex2" data-scroll-reveal="enter bottom and move 20px over 0.8s">
+        软硬件一体化定制研发服务，从需求分析、方案设计到批量交付，<br>
+        为各行业客户提供端到端的物联网解决方案
+      </p>
+      <div class="works-grids" data-scroll-reveal="enter left and move 100px over 1s">
+        <a href="#contact">
+          <div class="works-grid">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f3e5f5'/%3E%3Cstop offset='100%25' style='stop-color:%23e1bee7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='400' fill='url(%23g4)'/%3E%3Crect x='200' y='100' width='100' height='80' rx='6' fill='%238fc320' opacity='0.1'/%3E%3Crect x='500' y='60' width='100' height='120' rx='6' fill='%238fc320' opacity='0.15'/%3E%3Crect x='800' y='80' width='100' height='100' rx='6' fill='%238fc320' opacity='0.1'/%3E%3Cline x1='300' y1='140' x2='500' y2='120' stroke='%238fc320' stroke-width='2' opacity='0.2'/%3E%3Cline x1='600' y1='120' x2='800' y2='130' stroke='%238fc320' stroke-width='2' opacity='0.2'/%3E%3Ctext x='600' y='280' text-anchor='middle' font-size='18' fill='%238fc320' font-weight='bold'%3E🔧 需求分析 → 方案设计 → 原型开发 → 批量交付%3C/text%3E%3C/svg%3E" alt="智慧物联定制方案">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <div class="contact-item">
+<!-- ====== 核心优势 ====== -->
+<div class="advantages">
+  <div class="section-title">
+    <h2 data-scroll-reveal="enter bottom and move 20px over 0.4s">核心优势</h2>
+    <p data-scroll-reveal="enter bottom and move 20px over 0.6s">为客户提供可靠、高效的嵌入式物联网解决方案</p>
+  </div>
+  <div class="adv-grid">
+    <div class="adv-card" data-scroll-reveal="enter bottom and move 30px over 0.4s">
+      <div class="adv-icon">📡</div>
+      <h3>多协议兼容</h3>
+      <p>深度掌握各品牌 BMS 通讯协议，支持 CAN / RS485 / UART 多种接口</p>
+    </div>
+    <div class="adv-card" data-scroll-reveal="enter bottom and move 30px over 0.6s">
+      <div class="adv-icon">🔧</div>
+      <h3>软硬件一体</h3>
+      <p>嵌入式硬件设计 + 云端平台开发，全链路自主研发交付</p>
+    </div>
+    <div class="adv-card" data-scroll-reveal="enter bottom and move 30px over 0.8s">
+      <div class="adv-icon">⚡</div>
+      <h3>快速定制</h3>
+      <p>模块化设计理念，可根据客户需求快速定制硬件与软件方案</p>
+    </div>
+    <div class="adv-card" data-scroll-reveal="enter bottom and move 30px over 1.0s">
+      <div class="adv-icon">🛡️</div>
+      <h3>稳定可靠</h3>
+      <p>工业级元器件与严格测试流程，确保产品在各种环境下稳定运行</p>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 关于我们 ====== -->
+<div class="about" id="about">
+  <div class="about_con container">
+    <h2 data-scroll-reveal="enter bottom and move 30px over 0.4s">关于我们</h2>
+    <p data-scroll-reveal="enter bottom and move 30px over 0.6s">武汉鼎为智慧科技有限公司位于武汉东湖高新区，</p>
+    <p data-scroll-reveal="enter bottom and move 30px over 0.8s">是一家专注于 AIOT 物联网、BMS 定位器、9DOF 惯性传感方案的高科技企业。</p>
+    <p data-scroll-reveal="enter bottom and move 30px over 1.0s">公司具备 4G 定位器嵌入式软硬件核心技术，深度掌握各品牌 BMS 通讯协议，</p>
+    <p data-scroll-reveal="enter bottom and move 30px over 1.2s">为客户提供从方案设计到批量交付的一站式软硬件定制服务。</p>
+    <a class="about_more" href="#contact" data-scroll-reveal="enter bottom and move 30px over 1.4s">联系我们</a>
+  </div>
+</div>
+
+<!-- ====== 新闻中心 ====== -->
+<div class="news" id="news">
+  <div class="news-header">
+    <h2 data-scroll-reveal="enter bottom and move 20px over 0.4s">新闻中心</h2>
+    <p class="news_des" data-scroll-reveal="enter bottom and move 20px over 0.6s">关注行业动态，了解鼎为最新资讯</p>
+  </div>
+  <div class="new_box row">
+    <!-- 行业新闻 -->
+    <div class="col-md-6" data-scroll-reveal="enter left and move 100px over 0.8s">
+      <div class="new_wrap">
+        <div class="new_top clearfix">
+          <p class="pull-left">行业新闻</p>
+          <a class="pull-right" href="#news">More+</a>
+        </div>
+        <ul class="list-unstyled">
+          <li class="new_sbox clearfix">
+            <a href="#news">
+              <div class="fl"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e8f5e9'/%3E%3Ctext x='150' y='110' text-anchor='middle' font-size='14' fill='%238fc320'%3E行业动态%3C/text%3E%3C/svg%3E" alt=""></div>
+              <div class="fr">
+                <p class="news_title">两轮电动车 BMS 定位器市场趋势分析</p>
+                <span class="news_description">随着共享出行与换电模式的快速发展，BMS 定位器成为电动车智能化升级的核心部件，市场需求持续增长……</span>
+              </div>
+            </a>
+          </li>
+          <li class="new_sbox clearfix">
+            <a href="#news">
+              <div class="fl"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e3f2fd'/%3E%3Ctext x='150' y='110' text-anchor='middle' font-size='14' fill='%231976d2'%3E技术前沿%3C/text%3E%3C/svg%3E" alt=""></div>
+              <div class="fr">
+                <p class="news_title">9DOF 惯性传感在车辆姿态检测中的应用</p>
+                <span class="news_description">惯性测量单元（IMU）正在成为智能车辆的关键传感器，本文探讨 9DOF 在碰撞检测、姿态感知方面的最新进展……</span>
+              </div>
+            </a>
+          </li>
+          <li class="new_sbox clearfix">
+            <a href="#news">
+              <div class="fl"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23fff3e0'/%3E%3Ctext x='150' y='110' text-anchor='middle' font-size='14' fill='%23ff9800'%3E政策解读%3C/text%3E%3C/svg%3E" alt=""></div>
+              <div class="fr">
+                <p class="news_title">物联网设备安全新规解读与应对策略</p>
+                <span class="news_description">最新物联网安全标准发布，对设备认证、数据加密提出更高要求，企业如何快速合规……</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 公司新闻 -->
+    <div class="col-md-6" data-scroll-reveal="enter right and move 100px over 1.0s">
+      <div class="new_wrap">
+        <div class="new_top clearfix">
+          <p class="pull-left">公司新闻</p>
+          <a class="pull-right" href="#news">More+</a>
+        </div>
+        <div class="hotnews">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect width='600' height='300' fill='%23e8f5e9'/%3E%3Crect x='180' y='80' width='240' height='140' rx='8' fill='%238fc320' opacity='0.12'/%3E%3Ccircle cx='300' cy='150' r='30' fill='%238fc320' opacity='0.3'/%3E%3Ctext x='300' y='200' text-anchor='middle' font-size='14' fill='%238fc320' font-weight='bold'%3E鼎为智慧%3C/text%3E%3C/svg%3E" alt="">
+          <a href="#news">武汉鼎为智慧科技官网正式上线 <span>06-08</span></a>
+        </div>
+        <div class="new_con">
+          <ul>
+            <li><a href="#news">鼎为智慧新一代 BMS 定位器通过批量测试 <span class="data">06-01</span></a></li>
+            <li><a href="#news">公司与多家共享出行平台达成战略合作 <span class="data">05-20</span></a></li>
+            <li><a href="#news">9DOF 惯性传感模组获得客户批量订单 <span class="data">05-10</span></a></li>
+            <li><a href="#news">鼎为智慧参加武汉光谷物联网产业峰会 <span class="data">04-28</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== 联系我们 ====== -->
+<div class="contact" id="contact">
+  <div class="container">
+    <h2 data-scroll-reveal="enter bottom and move 20px over 0.4s">联系我们</h2>
+    <p class="contact-sub" data-scroll-reveal="enter bottom and move 20px over 0.6s">期待与您的合作</p>
+    <div class="contact-grid">
+      <div class="contact-card" data-scroll-reveal="enter bottom and move 30px over 0.6s">
         <div class="ci-icon">📍</div>
-        <div>
-          <div class="label">地址</div>
-          <div class="val">湖北省武汉市 · 东湖高新技术开发区</div>
-        </div>
+        <h4>公司地址</h4>
+        <p>湖北省武汉市东湖高新区</p>
       </div>
-      <div class="contact-item">
+      <div class="contact-card" data-scroll-reveal="enter bottom and move 30px over 0.8s">
         <div class="ci-icon">📧</div>
-        <div>
-          <div class="label">邮箱</div>
-          <div class="val">contact@dingwei-tech.com</div>
-        </div>
+        <h4>电子邮箱</h4>
+        <p>1962605879@qq.com</p>
       </div>
-      <div class="contact-item">
-        <div class="ci-icon">📞</div>
-        <div>
-          <div class="label">电话</div>
-          <div class="val">027-8888-XXXX</div>
-        </div>
-      </div>
-      <div class="contact-item">
+      <div class="contact-card" data-scroll-reveal="enter bottom and move 30px over 1.0s">
         <div class="ci-icon">🌐</div>
-        <div>
-          <div class="label">网站</div>
-          <div class="val">www.dingwei-tech.com</div>
-        </div>
+        <h4>主营业务</h4>
+        <p>AIOT · BMS定位器 · 9DOF惯性传感 · 软硬件定制</p>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="contact-form">
-      <div class="field">
-        <label>您的姓名</label>
-        <input type="text" placeholder="请输入姓名">
-      </div>
-      <div class="field">
-        <label>公司 / 机构</label>
-        <input type="text" placeholder="请输入公司名称">
-      </div>
-      <div class="field">
-        <label>电子邮箱</label>
-        <input type="email" placeholder="请输入邮箱地址">
-      </div>
-      <div class="field">
-        <label>需求描述</label>
-        <textarea placeholder="请简要描述您的项目需求或咨询内容"></textarea>
-      </div>
-      <button class="btn btn-primary" style="width:100%; justify-content:center;">提交咨询</button>
+</div><!-- /#myScrollspy -->
+
+<!-- ====== Footer ====== -->
+<div class="footer" id="footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="#banner">首页</a>
+      <a href="#service">产品中心</a>
+      <a href="#work">解决方案</a>
+      <a href="#about">关于我们</a>
+      <a href="#news">新闻中心</a>
+      <a href="#contact">联系我们</a>
     </div>
+    <p class="footer-info">
+      Copyright © 2024 <span>武汉鼎为智慧科技有限公司</span> All Rights Reserved.<br>
+      专注 AIOT 物联网 · BMS 定位器 · 9DOF 惯性传感方案
+    </p>
   </div>
-</section>
+</div>
 
-<!-- Footer -->
-<footer>
-  <div class="footer-links">
-    <a href="#about">关于我们</a>
-    <a href="#business">核心业务</a>
-    <a href="#capability">技术能力</a>
-    <a href="#contact">联系我们</a>
-  </div>
-  <p>© 2026 武汉鼎为智慧科技有限公司 · Wuhan Dingwei Smart Technology Co., Ltd. All Rights Reserved.</p>
-</footer>
+<!-- 侧边导航 -->
+<div class="floor_tip">
+  <ul class="nav">
+    <li class="active"><a href="#banner">返回顶部</a></li>
+    <li><a href="#service">产品中心</a></li>
+    <li><a href="#work">解决方案</a></li>
+    <li><a href="#about">关于我们</a></li>
+    <li><a href="#news">新闻中心</a></li>
+  </ul>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<script>
+/* ====== 移动端导航 ====== */
+$(function(){
+  var pull = $('#pull');
+  var menu = $('.top-nav ul');
+  var pullClicked = false;
+
+  $(pull).on('click', function(e){
+    e.preventDefault();
+    pullClicked = true;
+    menu.slideToggle();
+  });
+
+  $(window).on('resize', function(){
+    var w = $(window).width();
+    if(w > 768 && menu.is(':hidden')) {
+      menu.removeAttr('style');
+    }
+  });
+
+  // 点击菜单项后收起
+  menu.find('a').on('click', function(){
+    if($(window).width() <= 768 && pullClicked){
+      menu.slideUp();
+      pullClicked = false;
+    }
+  });
+
+  /* ====== 侧边导航滚动高亮 ====== */
+  $(window).on('scroll', function(){
+    var scrollPos = $(document).scrollTop() + 200;
+    $('.floor_tip li').removeClass('active');
+    var sections = ['#banner','#service','#work','#about','#news'];
+    for(var i = sections.length - 1; i >= 0; i--){
+      if($(sections[i]).length && $(sections[i]).offset().top <= scrollPos){
+        $('.floor_tip li').eq(i).addClass('active');
+        break;
+      }
+    }
+  });
+
+  /* ====== 平滑滚动 ====== */
+  $('a[href^="#"]').on('click', function(e){
+    var target = $(this).attr('href');
+    if(target === '#') return;
+    var $target = $(target);
+    if($target.length){
+      e.preventDefault();
+      $('html, body').animate({ scrollTop: $target.offset().top - 60 }, 600);
+    }
+  });
+
+  /* ====== 简易滚动动画 ====== */
+  var $revealItems = $('[data-scroll-reveal]');
+  function checkReveal(){
+    var windowH = $(window).height();
+    var scrollTop = $(window).scrollTop();
+    $revealItems.each(function(){
+      var $el = $(this);
+      if($el.hasClass('sr-visible')) return;
+      if($el.offset().top < scrollTop + windowH - 80){
+        $el.addClass('sr-visible').css({
+          'animation': 'fadeInUp 0.6s ease-out forwards'
+        });
+      }
+    });
+  }
+  checkReveal();
+  $(window).on('scroll', checkReveal);
+});
+
+/* 动画关键帧 */
+var style = document.createElement('style');
+style.textContent = '@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}';
+document.head.appendChild(style);
+</script>
 </body>
 </html>
