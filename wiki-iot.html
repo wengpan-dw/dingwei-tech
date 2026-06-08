@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物联网 (IoT) 技术全景概述 — 鼎为智慧行业百科</title>
+<meta name="description" content="物联网技术全景：四层架构（感知/网络/平台/应用）、主流通信技术（5G/NB-IoT/LoRa/WiFi/BLE）、行业应用与趋势。">
+<meta name="keywords" content="物联网,IoT,物联网架构,NB-IoT,LoRa,5G物联网,感知层,网络层,物联网平台,智慧城市,工业物联网">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Microsoft YaHei','PingFang SC',sans-serif; background: #f5f7fa; color: #333; line-height: 1.9; }
+.header { background: #1a1a2e; padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+.header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.header .logo a { color: #fff; font-size: 20px; font-weight: 700; text-decoration: none; }
+.header .logo a span { color: #8fc320; }
+.header .nav a { color: rgba(255,255,255,0.6); margin-left: 24px; font-size: 14px; text-decoration: none; transition: color .3s; }
+.header .nav a:hover,.header .nav a.active { color: #8fc320; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.article { background: #fff; border-radius: 8px; padding: 40px; margin: 30px auto; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+.article h1 { font-size: 28px; color: #1a1a2e; margin-bottom: 12px; }
+.article .meta { color: #999; font-size: 13px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+.article h2 { font-size: 20px; color: #1a1a2e; margin: 30px 0 12px; padding-left: 12px; border-left: 3px solid #8fc320; }
+.article h3 { font-size: 17px; color: #333; margin: 20px 0 8px; }
+.article p { margin-bottom: 14px; color: #555; }
+.article ul,.article ol { margin: 10px 0 16px 24px; color: #555; }
+.article li { margin-bottom: 6px; }
+.article table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+.article table th { background: #8fc320; color: #fff; padding: 10px; text-align: left; }
+.article table td { padding: 10px; border-bottom: 1px solid #eee; }
+.article table tr:nth-child(even) td { background: #f9fafb; }
+.article .highlight { background: #f0f7e6; border-left: 3px solid #8fc320; padding: 14px 18px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+.article .highlight p { margin: 0; color: #333; }
+.article a { color: #8fc320; text-decoration: none; }
+.article a:hover { text-decoration: underline; }
+.footer { background: #1a1a2e; color: rgba(255,255,255,0.5); text-align: center; padding: 30px 20px; margin-top: 60px; font-size: 13px; }
+.footer a { color: #8fc320; }
+@media (max-width: 768px) {
+  .article { padding: 24px 16px; }
+  .article h1 { font-size: 22px; }
+  .article h2 { font-size: 17px; }
+  .header .nav a { margin-left: 12px; font-size: 13px; }
+}
+/* Wiki list page */
+.wiki-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 30px; }
+.wiki-card { background: #fff; border-radius: 8px; padding: 28px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform .3s,box-shadow .3s; text-decoration: none; display: block; }
+.wiki-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); text-decoration: none; }
+.wiki-card .wc-icon { font-size: 32px; margin-bottom: 10px; }
+.wiki-card h3 { color: #1a1a2e; font-size: 18px; margin-bottom: 8px; }
+.wiki-card p { color: #888; font-size: 14px; line-height: 1.6; }
+.wiki-card .wc-tag { display: inline-block; background: #f0f7e6; color: #8fc320; font-size: 11px; padding: 2px 10px; border-radius: 12px; margin-top: 10px; font-weight: 600; }
+@media (max-width: 768px) { .wiki-grid { grid-template-columns: 1fr; } }
+.breadcrumb { font-size: 13px; color: #999; margin: 20px 0 0; }
+.breadcrumb a { color: #8fc320; }
+</style>
+</head>
+<body>
+<div class="header"><div class="container">
+<div class="logo"><a href="index.html">武汉<span>鼎为智慧</span>科技</a></div>
+<div class="nav">
+<a href="index.html">首页</a>
+<a href="index.html#service">产品</a>
+<a href="index.html#work">方案</a>
+<a href="wiki.html" class="active">百科</a>
+<a href="index.html#contact">联系</a>
+</div></div></div>
+
+<div class="container">
+<div class="breadcrumb"><a href="index.html">首页</a> &gt; <a href="wiki.html">行业百科</a> &gt; 正文</div>
+<div class="article">
+
+<h1>物联网 (IoT) 技术全景概述</h1>
+<div class="meta">鼎为智慧 · 行业百科 · 2026年6月</div>
+
+<p><strong>物联网</strong>（Internet of Things，IoT）是指通过信息传感设备，按约定协议，将任何物品与互联网连接，进行信息交换和通信，以实现<strong>智能化识别、定位、跟踪、监控和管理</strong>的网络。截至 2026 年，全球 IoT 连接数已突破 <strong>200 亿</strong>。</p>
+
+<h2>一、物联网四层架构</h2>
+<table>
+<tr><th>层级</th><th>功能</th><th>典型技术</th></tr>
+<tr><td><strong>感知层</strong></td><td>数据采集（传感器、执行器）</td><td>温湿度传感器、GPS 模块、RFID、摄像头</td></tr>
+<tr><td><strong>网络层</strong></td><td>数据传输（有/无线通信）</td><td>4G/5G、NB-IoT、LoRa、WiFi、BLE、RS485</td></tr>
+<tr><td><strong>平台层</strong></td><td>数据存储、分析、管理</td><td>MQTT Broker、时序数据库、规则引擎、AI 分析</td></tr>
+<tr><td><strong>应用层</strong></td><td>业务场景落地</td><td>智慧出行、智能制造、智慧城市、能源管理</td></tr>
+</table>
+
+<h2>二、主流通信技术对比</h2>
+<table>
+<tr><th>技术</th><th>速率</th><th>距离</th><th>功耗</th><th>典型场景</th></tr>
+<tr><td><strong>5G</strong></td><td>极高（Gbps）</td><td>~300m</td><td>高</td><td>自动驾驶、远程手术、AR/VR</td></tr>
+<tr><td><strong>4G LTE</strong></td><td>高（Mbps）</td><td>~2km</td><td>中高</td><td>车载定位、视频监控、DTU 数传</td></tr>
+<tr><td><strong>NB-IoT</strong></td><td>低（~100kbps）</td><td>~10km</td><td>极低</td><td>智能水表/电表、烟感、井盖监测</td></tr>
+<tr><td><strong>LoRa</strong></td><td>低（~50kbps）</td><td>~15km</td><td>极低</td><td>农业传感器、园区级私有网络</td></tr>
+<tr><td><strong>WiFi</strong></td><td>极高</td><td>~50m</td><td>高</td><td>智能家居、室内定位</td></tr>
+<tr><td><strong>BLE</strong></td><td>中（~2Mbps）</td><td>~100m</td><td>低</td><td>近场通信、穿戴设备、OBD</td></tr>
+</table>
+
+<div class="highlight"><p><strong>鼎为选型建议</strong>：二轮车定位 → 4G（Cat.1 性价比最优）；换电柜 → 4G + BLE（近场开柜）；固定传感器 → NB-IoT（低功耗广覆盖）。</p></div>
+
+<h2>三、物联网关键技术栈</h2>
+<h3>设备端</h3>
+<ul><li>MCU/MPU：STM32、ESP32、CH32</li><li>RTOS：FreeRTOS、RT-Thread</li><li>通信协议：MQTT、CoAP、Modbus、CAN</li></ul>
+<h3>云端</h3>
+<ul><li>接入层：EMQX、VerneMQ（MQTT Broker）</li><li>数据层：TimescaleDB、TDengine（时序数据库）</li><li>应用层：规则引擎、数据看板、告警推送</li></ul>
+
+<h2>四、行业趋势</h2>
+<ol>
+<li><strong>Cat.1 替代 2G/3G</strong>：随着 2G/3G 退网，LTE Cat.1 成为中低速 IoT 主流</li>
+<li><strong>边缘计算普及</strong>：数据在网关层预处理，减少云端压力</li>
+<li><strong>AI + IoT = AIoT</strong>：端侧 AI 推理（TinyML）、云端大模型分析</li>
+<li><strong>安全合规</strong>：各国物联网安全法规趋严（中国《物联网安全白皮书》）</li>
+</ol>
+
+<p style="margin-top:30px;color:#999;">👉 <a href="wiki.html">返回行业百科</a> | 👉 <a href="index.html#contact">咨询鼎为物联网方案</a></p>
+
+</div>
+</div>
+
+<div class="footer">
+  <p>© 2026 武汉鼎为智慧科技有限公司 | <a href="index.html">返回首页</a> | BMS定位器 · 4G车载定位 · AIOT物联网方案商</p>
+</div>
+</body></html>

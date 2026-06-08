@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MQTT 协议详解：物联网通信的核心协议 — 鼎为智慧行业百科</title>
+<meta name="description" content="全面解析 MQTT 协议：发布/订阅模型、QoS 服务质量等级、主题设计、遗嘱消息、与 HTTP/CoAP 对比。物联网开发者必读。">
+<meta name="keywords" content="MQTT协议,MQTT详解,发布订阅,QoS,MQTT broker,物联网协议,MQTT vs HTTP,CoAP">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Microsoft YaHei','PingFang SC',sans-serif; background: #f5f7fa; color: #333; line-height: 1.9; }
+.header { background: #1a1a2e; padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+.header .container { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.header .logo a { color: #fff; font-size: 20px; font-weight: 700; text-decoration: none; }
+.header .logo a span { color: #8fc320; }
+.header .nav a { color: rgba(255,255,255,0.6); margin-left: 24px; font-size: 14px; text-decoration: none; transition: color .3s; }
+.header .nav a:hover,.header .nav a.active { color: #8fc320; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.article { background: #fff; border-radius: 8px; padding: 40px; margin: 30px auto; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+.article h1 { font-size: 28px; color: #1a1a2e; margin-bottom: 12px; }
+.article .meta { color: #999; font-size: 13px; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+.article h2 { font-size: 20px; color: #1a1a2e; margin: 30px 0 12px; padding-left: 12px; border-left: 3px solid #8fc320; }
+.article h3 { font-size: 17px; color: #333; margin: 20px 0 8px; }
+.article p { margin-bottom: 14px; color: #555; }
+.article ul,.article ol { margin: 10px 0 16px 24px; color: #555; }
+.article li { margin-bottom: 6px; }
+.article table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+.article table th { background: #8fc320; color: #fff; padding: 10px; text-align: left; }
+.article table td { padding: 10px; border-bottom: 1px solid #eee; }
+.article table tr:nth-child(even) td { background: #f9fafb; }
+.article .highlight { background: #f0f7e6; border-left: 3px solid #8fc320; padding: 14px 18px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+.article .highlight p { margin: 0; color: #333; }
+.article a { color: #8fc320; text-decoration: none; }
+.article a:hover { text-decoration: underline; }
+.footer { background: #1a1a2e; color: rgba(255,255,255,0.5); text-align: center; padding: 30px 20px; margin-top: 60px; font-size: 13px; }
+.footer a { color: #8fc320; }
+@media (max-width: 768px) {
+  .article { padding: 24px 16px; }
+  .article h1 { font-size: 22px; }
+  .article h2 { font-size: 17px; }
+  .header .nav a { margin-left: 12px; font-size: 13px; }
+}
+/* Wiki list page */
+.wiki-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 30px; }
+.wiki-card { background: #fff; border-radius: 8px; padding: 28px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform .3s,box-shadow .3s; text-decoration: none; display: block; }
+.wiki-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); text-decoration: none; }
+.wiki-card .wc-icon { font-size: 32px; margin-bottom: 10px; }
+.wiki-card h3 { color: #1a1a2e; font-size: 18px; margin-bottom: 8px; }
+.wiki-card p { color: #888; font-size: 14px; line-height: 1.6; }
+.wiki-card .wc-tag { display: inline-block; background: #f0f7e6; color: #8fc320; font-size: 11px; padding: 2px 10px; border-radius: 12px; margin-top: 10px; font-weight: 600; }
+@media (max-width: 768px) { .wiki-grid { grid-template-columns: 1fr; } }
+.breadcrumb { font-size: 13px; color: #999; margin: 20px 0 0; }
+.breadcrumb a { color: #8fc320; }
+</style>
+</head>
+<body>
+<div class="header"><div class="container">
+<div class="logo"><a href="index.html">武汉<span>鼎为智慧</span>科技</a></div>
+<div class="nav">
+<a href="index.html">首页</a>
+<a href="index.html#service">产品</a>
+<a href="index.html#work">方案</a>
+<a href="wiki.html" class="active">百科</a>
+<a href="index.html#contact">联系</a>
+</div></div></div>
+
+<div class="container">
+<div class="breadcrumb"><a href="index.html">首页</a> &gt; <a href="wiki.html">行业百科</a> &gt; 正文</div>
+<div class="article">
+
+<h1>MQTT 协议详解：物联网通信的核心协议</h1>
+<div class="meta">鼎为智慧 · 行业百科 · 2026年6月</div>
+
+<p><strong>MQTT</strong>（Message Queuing Telemetry Transport，消息队列遥测传输）是物联网领域应用最广泛的轻量级通信协议。它由 IBM 于 1999 年发明，2013 年成为 OASIS 标准。MQTT 的设计哲学是<strong>极简、低带宽、低功耗</strong>，特别适合传感器、嵌入式设备等资源受限场景。</p>
+
+<h2>一、核心模型：发布/订阅</h2>
+<p>MQTT 采用<strong>发布/订阅（Pub/Sub）</strong>模型，与传统的请求/响应模型（如 HTTP）完全不同：</p>
+<ul>
+<li><strong>发布者（Publisher）</strong>：产生数据的设备，向特定"主题"发送消息</li>
+<li><strong>订阅者（Subscriber）</strong>：消费数据的设备，订阅感兴趣的"主题"</li>
+<li><strong>代理（Broker）</strong>：消息中转站，负责接收、过滤、分发消息</li>
+</ul>
+<p>发布者和订阅者<strong>互相不需要知道对方的存在</strong>——它们只和 Broker 通信。这种解耦设计极大提升了系统的灵活性和可扩展性。</p>
+
+<h2>二、QoS 服务质量 — MQTT 的灵魂</h2>
+<p>MQTT 提供三级服务质量保证：</p>
+<table>
+<tr><th>QoS 级别</th><th>语义</th><th>消息到达保证</th><th>典型场景</th></tr>
+<tr><td><strong>QoS 0</strong></td><td>最多一次</td><td>不保证到达，消息可能丢失</td><td>高频传感器数据（丢失一两条无影响）</td></tr>
+<tr><td><strong>QoS 1</strong></td><td>至少一次</td><td>保证到达，但可能重复</td><td>告警消息、状态变更</td></tr>
+<tr><td><strong>QoS 2</strong></td><td>恰好一次</td><td>保证到达且不重复（四次握手）</td><td>计费数据、支付指令</td></tr>
+</table>
+
+<div class="highlight"><p><strong>鼎为建议</strong>：二轮车 BMS 定位器上行数据建议 QoS 0（高频 + 容忍丢失），下行控制指令（远程锁车）必须 QoS 1 或 2。</p></div>
+
+<h2>三、MQTT vs HTTP vs CoAP</h2>
+<table>
+<tr><th>协议</th><th>MQTT</th><th>HTTP</th><th>CoAP</th></tr>
+<tr><td>模型</td><td>发布/订阅</td><td>请求/响应</td><td>请求/响应（类 REST）</td></tr>
+<tr><td>传输层</td><td>TCP</td><td>TCP</td><td>UDP</td></tr>
+<tr><td>消息开销</td><td>最小 2 字节</td><td>数百字节 HTTP Headers</td><td>最小 4 字节</td></tr>
+<tr><td>长连接</td><td>✅ 天然支持</td><td>❌ 需 WebSocket</td><td>❌</td></tr>
+<tr><td>低功耗</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐</td><td>⭐⭐⭐⭐</td></tr>
+</table>
+
+<h2>四、MQTT 5.0 新特性</h2>
+<ul>
+<li><strong>会话过期</strong>：可配置离线消息保留时间</li>
+<li><strong>原因码</strong>：更详细的错误反馈（如"主题未授权"vs"服务器不可用"）</li>
+<li><strong>载荷格式指示</strong>：明确标记消息是 UTF-8 文本还是二进制</li>
+<li><strong>请求/响应模式</strong>：在 Pub/Sub 之上支持同步调用</li>
+</ul>
+
+<h2>五、最佳实践</h2>
+<ol>
+<li><strong>主题设计</strong>：使用层级结构，如 <code>device/{deviceId}/telemetry</code>、<code>device/{deviceId}/command</code></li>
+<li><strong>遗嘱消息（Last Will）</strong>：设备异常断线时自动发布告警</li>
+<li><strong>Keep Alive</strong>：合理设置心跳间隔（建议 60-120 秒）</li>
+<li><strong>TLS 加密</strong>：生产环境务必启用 TLS 1.2+</li>
+</ol>
+
+<p style="margin-top:30px;color:#999;">👉 <a href="wiki.html">返回行业百科</a> | 👉 <a href="index.html#contact">咨询鼎为 AIOT 平台 MQTT 接入</a></p>
+
+</div>
+</div>
+
+<div class="footer">
+  <p>© 2026 武汉鼎为智慧科技有限公司 | <a href="index.html">返回首页</a> | BMS定位器 · 4G车载定位 · AIOT物联网方案商</p>
+</div>
+</body></html>
