@@ -758,6 +758,80 @@ nav a#pull span {
   .contact-card p { font-size: 13px; }
 }
 
+/* ====== 战略合作伙伴 ====== */
+.partners {
+  padding: 60px 0 80px;
+  background: #f8fafb;
+}
+.partner-modes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1000px; margin: 0 auto 50px;
+}
+.partner-mode {
+  background: #fff; border-radius: 8px;
+  padding: 36px 24px; text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.partner-mode:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+.pm-icon { margin-bottom: 16px; }
+.pm-icon svg { width: 56px; height: 56px; }
+.partner-mode h3 { font-size: 18px; color: #333; margin-bottom: 8px; }
+.partner-mode p { font-size: 14px; color: #888; line-height: 1.8; }
+
+.partner-scenarios { max-width: 1100px; margin: 0 auto; }
+.partner-scenarios h3 {
+  text-align: center; font-size: 22px; font-weight: 700;
+  color: #333; margin-bottom: 30px;
+}
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.scenario-card {
+  background: #fff; border-radius: 8px;
+  padding: 24px 20px; text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.3s;
+  position: relative; overflow: hidden;
+}
+.scenario-card:hover { transform: translateY(-4px); }
+.sc-icon { font-size: 32px; margin-bottom: 10px; }
+.scenario-card h4 { font-size: 16px; color: #333; margin-bottom: 8px; }
+.scenario-card p { font-size: 13px; color: #888; line-height: 1.6; }
+.sc-tag {
+  display: inline-block; margin-top: 10px;
+  padding: 3px 12px; border-radius: 20px;
+  background: #8fc320; color: #fff;
+  font-size: 11px; font-weight: 600;
+}
+
+.partner-cta {
+  text-align: center; margin-top: 50px; padding: 40px;
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  border-radius: 12px; color: #fff;
+}
+.partner-cta p {
+  font-size: 16px; margin-bottom: 20px;
+  color: rgba(255,255,255,0.8);
+}
+
+@media (max-width: 768px) {
+  .partner-modes { grid-template-columns: 1fr; }
+  .scenario-grid { grid-template-columns: 1fr 1fr; }
+  .partner-cta { padding: 30px 20px; }
+  .partner-cta p { font-size: 14px; }
+}
+@media (max-width: 480px) {
+  .scenario-grid { grid-template-columns: 1fr; }
+}
+
 /* ====== Footer ====== */
 .footer {
   background: #1a1a2e;
@@ -1282,6 +1356,91 @@ nav a#pull span {
 </div>
 
 </div><!-- /#myScrollspy -->
+
+<!-- ====== 战略合作伙伴 ====== -->
+<div class="partners" id="partners">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-subtitle">COOPERATION</p>
+      <h2>战略合作伙伴</h2>
+      <p class="section-desc">以车载定位方案为核心，赋能产业链合作伙伴</p>
+    </div>
+
+    <!-- 合作模式 -->
+    <div class="partner-modes">
+      <div class="partner-mode" data-scroll-reveal="enter bottom and move 30px over 0.4s">
+        <div class="pm-icon">
+          <svg viewBox="0 0 64 64" fill="none"><rect x="8" y="8" width="48" height="48" rx="8" stroke="#8fc320" stroke-width="2"/><rect x="20" y="20" width="24" height="14" rx="3" fill="#8fc320" opacity="0.2"/><line x1="20" y1="38" x2="44" y2="38" stroke="#8fc320" stroke-width="1.5"/><line x1="26" y1="44" x2="38" y2="44" stroke="#8fc320" stroke-width="1.5"/></svg>
+        </div>
+        <h3>方案授权</h3>
+        <p>鼎为提供核心主板 + SDK，合作伙伴集成到自有产品，快速上市</p>
+      </div>
+      <div class="partner-mode" data-scroll-reveal="enter bottom and move 30px over 0.6s">
+        <div class="pm-icon">
+          <svg viewBox="0 0 64 64" fill="none"><rect x="4" y="12" width="56" height="40" rx="6" stroke="#8fc320" stroke-width="2"/><rect x="14" y="8" width="10" height="8" rx="2" fill="#8fc320" opacity="0.3"/><rect x="28" y="8" width="10" height="8" rx="2" fill="#8fc320" opacity="0.3"/><circle cx="32" cy="32" r="8" fill="none" stroke="#8fc320" stroke-width="2"/><circle cx="32" cy="32" r="3" fill="#8fc320"/></svg>
+        </div>
+        <h3>ODM 定制</h3>
+        <p>客户提需求，鼎为完成硬件设计→打样→测试→批量交付，交钥匙工程</p>
+      </div>
+      <div class="partner-mode" data-scroll-reveal="enter bottom and move 30px over 0.8s">
+        <div class="pm-icon">
+          <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="28" stroke="#8fc320" stroke-width="2"/><circle cx="32" cy="20" r="6" fill="#8fc320" opacity="0.15"/><circle cx="20" cy="38" r="6" fill="#8fc320" opacity="0.15"/><circle cx="44" cy="38" r="6" fill="#8fc320" opacity="0.15"/><line x1="28" y1="24" x2="22" y2="34" stroke="#8fc320" stroke-width="1"/><line x1="36" y1="24" x2="42" y2="34" stroke="#8fc320" stroke-width="1"/><line x1="24" y1="42" x2="40" y2="42" stroke="#8fc320" stroke-width="1"/></svg>
+        </div>
+        <h3>联合投标</h3>
+        <p>双方优势互补，共同参与二轮车 / 物流车联网 / 换电柜等政企项目</p>
+      </div>
+    </div>
+
+    <!-- 场景矩阵 -->
+    <div class="partner-scenarios">
+      <h3 data-scroll-reveal="enter bottom and move 20px over 0.4s">车载定位方案 · 典型应用场景</h3>
+      <div class="scenario-grid">
+        <div class="scenario-card" data-scroll-reveal="enter bottom and move 20px over 0.5s">
+          <div class="sc-icon">🛵</div>
+          <h4>二轮电动车定位器</h4>
+          <p>4G BMS 跟踪器主板 + GNSS 多模定位 + BMS 协议解析</p>
+          <span class="sc-tag">量产方案</span>
+        </div>
+        <div class="scenario-card" data-scroll-reveal="enter bottom and move 20px over 0.6s">
+          <div class="sc-icon">🏍️</div>
+          <h4>摩托车智能中控</h4>
+          <p>9DOF 惯性导航 + 碰撞检测 + 远程锁车 + 4G 通讯</p>
+          <span class="sc-tag">高附加值</span>
+        </div>
+        <div class="scenario-card" data-scroll-reveal="enter bottom and move 20px over 0.7s">
+          <div class="sc-icon">🔋</div>
+          <h4>换电柜 BMS 主板</h4>
+          <p>多槽位电池监控 + SOC 云端同步 + 充电策略智能调度</p>
+          <span class="sc-tag">增长赛道</span>
+        </div>
+        <div class="scenario-card" data-scroll-reveal="enter bottom and move 20px over 0.8s">
+          <div class="sc-icon">🚛</div>
+          <h4>物流车辆追踪</h4>
+          <p>资产定位终端 + 电子围栏 + 轨迹回放 + 90 天历史存储</p>
+          <span class="sc-tag">成熟方案</span>
+        </div>
+        <div class="scenario-card" data-scroll-reveal="enter bottom and move 20px over 0.9s">
+          <div class="sc-icon">📱</div>
+          <h4>AIOT 云平台对接</h4>
+          <p>MQTT/CoAP/HTTP 协议 + 百万级并发 + 远程 OTA 升级</p>
+          <span class="sc-tag">平台赋能</span>
+        </div>
+        <div class="scenario-card" data-scroll-reveal="enter bottom and move 20px over 1.0s">
+          <div class="sc-icon">🔧</div>
+          <h4>软硬件一体化定制</h4>
+          <p>需求分析→芯片选型→PCB 设计→嵌入式开发→批量交付</p>
+          <span class="sc-tag">全链路</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="partner-cta" data-scroll-reveal="enter bottom and move 20px over 1.0s">
+      <p>成为鼎为智慧的合作伙伴，共享 100+ 项目交付经验与 30+ 技术专利</p>
+      <a href="#contact" class="btn-banner btn-banner-primary">成为合作伙伴</a>
+    </div>
+  </div>
+</div>
 
 <!-- ====== Footer ====== -->
 <div class="footer" id="footer">
