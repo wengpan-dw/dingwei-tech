@@ -1,15 +1,26 @@
 // API 服务层
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const getBaseURL = (): string => {
+  // 运行时自定义地址（用户通过登录页⚙设置）
+  const stored = localStorage.getItem('api_base_url');
+  if (stored) return stored;
+  // 构建时环境变量
+  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+};
 
 const api = axios.create({
-  baseURL,
+  baseURL: getBaseURL(),
   timeout: 15000,
 });
 
-// 请求拦截器：添加 token
+// 请求拦截器：动态 baseURL + token
 api.interceptors.request.use((config) => {
+  // 每次请求前检测自定义地址（支持运行时切换，无需刷新）
+  const customBase = localStorage.getItem('api_base_url');
+  if (customBase) {
+    config.baseURL = customBase;
+  }
   const token = localStorage.getItem('access_token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -27,7 +38,7 @@ api.interceptors.response.use(
       const refresh = localStorage.getItem('refresh_token');
       if (refresh) {
         try {
-          const { data } = await axios.post(`${baseURL}/api/auth/refresh`, {
+          const { data } = await axios.post(`${getBaseURL()}/api/auth/refresh`, {
             refresh_token: refresh,
           });
           localStorage.setItem('access_token', data.access_token);
